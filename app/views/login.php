@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../../assets/css/bootstrap.css">
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <script src="../../assets/js/jquery.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="public/assets2/css/bootstrap.css">
+    <link rel="stylesheet" href="public/assets2/css/style.css">
+    <script src="public/assets2/js/jquery.min.js"></script>
+    <script src="public/assets2/js/bootstrap.min.js"></script>
     <title>Noel</title>
 </head>
 <body>
@@ -17,8 +17,6 @@
             </div>
             <div class="col-md-7">
                 <h2>We are happy to see you</h2>
-                <p> <h2>ETU003304</h2>
-                <H2>ETU003356</H2></p>
                 <h4>Begin your day with us</h4>
                 <div class="sign-google">
                    
