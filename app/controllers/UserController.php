@@ -32,5 +32,23 @@ class UserController
             Flight::render('auth/login', ['error' => 'Nom d’utilisateur ou mot de passe incorrect ']);
         }
     }
+    public function registerForm() {
+        Flight::render('auth/register');
+    }
+
+    // Traiter l'inscription
+    public function register() {
+        session_start();
+        $data = Flight::request()->data;
+        $username = $data->username;
+        $password = $data->password;
+        $balance = $data->balance; // Solde initial
+        $userModel = new Users(Flight::db());
+        $userModel->register($username,$password,$balance);
+        $_SESSION['user']=$userModel->getUserByUsername($username);
+
+
+        Flight::redirect('dashboard/index');
+    }
 
 }

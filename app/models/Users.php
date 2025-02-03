@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Flight;
-use Capital;
+use app\models\Capital;
 
 class Users {
     private $db;
@@ -25,6 +25,17 @@ class Users {
         }
         return false;
     }
+    public function getIdByUsername($username)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE nom = :username');
+        $stmt->execute(['username' => $username]);
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            return $user['id_user'];
+        }
+        return null;
+    }
     public function register($username,$password,$capital) {
         
         // Ajouter l'utilisateur dans la base de données
@@ -34,8 +45,21 @@ class Users {
             'username' => $username,
             'password' => $password,
         ]);
-        $capital= new Capital();
+        $capital= new Capital(Flight::db());
+        $id_user=$this->getIdByUsername($username);
+        $capital->modifierCapital($id_user, $capital);
 
   
+    }
+    public function getUserByUsername($username)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM users WHERE nom = :username');
+        $stmt->execute(['username' => $username]);
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+        if ($user) {
+            return $user;
+        }
+        return null;
     }
 }
