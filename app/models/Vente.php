@@ -12,6 +12,6 @@ class Vente {
     }
 
     public function vendre ($id_animal, $date_ventes) {
-
+        
     }
 }
