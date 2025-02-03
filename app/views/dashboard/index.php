@@ -7,5 +7,6 @@
 </head>
 <body>
     <?php include('../layout/header.php'); ?>
+    <p>dashboard</p>
 </body>
 </html>
