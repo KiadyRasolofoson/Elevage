@@ -37,6 +37,7 @@ FLight::route('GET /vente', [$user_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
 FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
 
+Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 
