@@ -67,3 +67,17 @@ SELECT * FROM ventes_animaux;
 SELECT * FROM nourritures;
 SELECT * FROM nourrir_animaux;
 SELECT * FROM capital;
+
+CREATE VIEW animaux_avec_ventes AS
+SELECT 
+    a.id AS animal_id,
+    a.nom AS animal_name,
+    e.nom AS espece_name,
+    IF(va.id IS NOT NULL, 'Oui', 'Non') AS deja_dans_ventes
+FROM 
+    animaux a
+JOIN 
+    espece e ON a.id_espece = e.id
+LEFT JOIN 
+    ventes_animaux va ON a.id = va.animal_id;
+
