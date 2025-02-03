@@ -14,40 +14,38 @@ if (!empty($_GET['indice'])) {
 	<title>Document</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/Elevage/public/assets/css/header/css/style.css">
+	<link rel="stylesheet" href="<?= $base_url; ?>/public/assets2/header/style.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 
 <body>
-	<section class="ftco-section">
-		<div class="container">
-			<nav class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light" id="ftco-navbar">
-				<div class="container">
-					<a class="navbar-brand" href="<?php echo $base_url . $nav_link[0] . '?indice=' . 0; ?>">StockFarm</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="fa fa-bars"></span> Menu
-					</button>
-					<div class="collapse navbar-collapse" id="ftco-nav">
-						<ul class="navbar-nav ml-auto mr-md-3">
-							<?php
-							for ($i = 0; $i < count($nav); $i++) {
-								if ($i == $indice) {
-							?>
-									<li class="nav-item active"><a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
-								<?php } else { ?>
-									<li class="nav-item"><a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
-								<?php } ?>
-							<?php } ?>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
+	<header class="header">
+      <nav class="nav">
+        <a href="#" class="nav_logo">StockFarm</a>
 
-	</section>
+        <ul class="nav_items">
+          <li class="nav_item">
+
+			<?php
+				for ($i = 0; $i < count($nav); $i++) {
+					if ($i == $indice) {
+			?>
+			<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link active" style="font-size:larger;color: #FFF8E1 !important;"><?php echo $nav[$i]; ?></a>
+			<?php } else { ?>
+				<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger; color: #FFF8E1 !important;"><?php echo $nav[$i]; ?></a>
+			<?php } ?>
+			<?php } ?>
+          </li>
+        </ul>
+
+        <button class="button" id="form-open">Login</button>
+      </nav>
+    </header>
+
 
 	<script src="/Elevage/public/assets/css/header/js/jquery.min.js"></script>
 	<script src="/Elevage/public/assets/css/header/js/popper.js"></script>
 	<script src="/Elevage/public/assets/css/header/js/bootstrap.min.js"></script>
 	<script src="/Elevage/public/assets/css/header/js/main.js"></script>
-
+	<script src="<?= $base_url; ?>/public/assets2/header/script.js"></script>
 </body>
