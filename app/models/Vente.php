@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\Fonction;
 use Flight;
 
 class Vente
@@ -11,6 +12,12 @@ class Vente
     public function __construct($db)
     {
         $this->db = $db;
+    }
+
+    public function getAll()
+    {
+        $fonction = new Fonction($this->db);
+        return $fonction->getAll('ventes_animaux');
     }
 
     public function vendre($id_animal, $date_ventes)

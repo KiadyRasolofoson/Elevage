@@ -12,7 +12,8 @@ class VenteController
 
     public function goVente()
     {
+        
         Flight::render('vendre/index');
     }
-    
+
 }
