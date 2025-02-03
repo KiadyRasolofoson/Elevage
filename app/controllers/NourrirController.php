@@ -40,6 +40,7 @@ class NourrirController
            
         
             Flight::json(['success' => 'L\'animal a été nourri avec succès']);
+            Flight::redirect('dashboard');
         } else {
             Flight::json(['error' => $result], 500);
         }

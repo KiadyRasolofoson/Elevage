@@ -9,17 +9,6 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Users</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
 
         .user-name {
             font-size: 2rem;
@@ -39,7 +28,7 @@ $base_url = Flight::app()->get('flight.base_url');
             left: 0;
         }
 
-        .container {
+        .container1 {
             display: flex;
             justify-content: space-around;
             width: 100%;
@@ -77,7 +66,7 @@ $base_url = Flight::app()->get('flight.base_url');
 <body>
     <?php include('app/views/layout/header.php'); ?>
     <div class="user-name">Nom de l'utilisateur</div>
-    <div class="container">
+    <div class="container1">
         <div class="box"></div>
         <div class="box"></div>
         <div class="box"></div>
