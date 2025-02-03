@@ -15,6 +15,7 @@ $base_url = Flight::app()->get('flight.base_url');
             font-weight: bold;
             margin-bottom: 10px;
             position: relative;
+            justify-content: center;
         }
 
         .user-name::after {
@@ -38,6 +39,7 @@ $base_url = Flight::app()->get('flight.base_url');
         .box {
             width: 100px;
             height: 100px;
+            margin-top: 50px;
             background-color: #3498db;
             animation: float 3s infinite ease-in-out;
         }
