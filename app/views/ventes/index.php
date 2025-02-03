@@ -22,6 +22,8 @@ $base_url = Flight::app()->get('flight.base_url');
                         <td>Id</td>
                         <td>Nom</td>
                         <td>Espèce</td>
+                        <td>Poids Minimal</td>
+                        <td>Poids Actuel</td>
                         <td>Action</td>
                     </tr>
                 </thead>
@@ -31,6 +33,8 @@ $base_url = Flight::app()->get('flight.base_url');
                             <td><?php echo htmlspecialchars($animal['animal_id']); ?></td>
                             <td><?php echo htmlspecialchars($animal['animal_name']); ?></td>
                             <td><?php echo htmlspecialchars($animal['espece_name']); ?></td>
+                            <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
+                            <td><?php echo htmlspecialchars($animal['poids_actuel']) ? htmlspecialchars($animal['poids_actuel']) . ' kg' : 'Non disponible'; ?></td>
                             <td>
                                 <?php if ($animal['deja_dans_ventes'] != "Oui") { ?>
                                     <button class="btn btn-primary vendre-btn" data-id="<?php echo $animal['animal_id']; ?>">Vendre</button>
@@ -45,11 +49,10 @@ $base_url = Flight::app()->get('flight.base_url');
         <?php } else { ?>
             <p>Aucun animal disponible à vendre.</p>
         <?php } ?>
-    </div>
-
+    </div>  
     <script>
-        $(document).ready(function () {
-            $(".vendre-btn").click(function () {
+        $(document).ready(function() {
+            $(".vendre-btn").click(function() {
                 let id_animal = $(this).data("id");
                 let button = $(this);
                 console.log("<?php echo $base_url; ?>/vente/vendre/" + id_animal);
@@ -57,14 +60,14 @@ $base_url = Flight::app()->get('flight.base_url');
                     url: "<?php echo $base_url; ?>/vente/vendre/" + id_animal,
                     type: "POST",
                     dataType: "json",
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             button.replaceWith('<span class="text-muted">Déjà en vente</span>'); // Remplacer le bouton par un texte
                         } else {
                             alert(response.message);
                         }
                     },
-                    error: function () {
+                    error: function() {
                         alert("Erreur lors de la vente.");
                     }
                 });
