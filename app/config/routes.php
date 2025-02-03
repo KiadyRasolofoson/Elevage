@@ -29,9 +29,10 @@ Flight::route('GET /dashboard', [$user_controller, 'home']);
 FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 FLight::route('GET /user', [$user_controller, 'goUser']);
 FLight::route('GET /animal', [$user_controller, 'goAnimal']);
-FLight::route('GET /alimentation', [$user_controller, 'goAlimenation']);
+FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
+
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 
