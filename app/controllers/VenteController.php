@@ -23,8 +23,8 @@ class VenteController
     public function vendre($id_animaux)
     {
         $vente = new Vente(Flight::db());
-        $date_vente = date('Y-m-d H:i:s');
+        $date_vente = date('Y-m-d'); 
         $result = $vente->vendre($id_animaux, $date_vente);
-        Flight::json(json_decode($result, true)); 
+        Flight::json(json_decode($result, true));
     }
 }
