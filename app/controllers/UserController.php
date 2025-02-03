@@ -63,7 +63,7 @@ class UserController
         $alimentation=new Alimentation(Flight::db());
         $alimentations=$alimentation->getAllAlimentation();
         $animals=$animal->getAllAnimal();
-        Flight::render('nourrir/index', ['animals' => $animals]);
+        Flight::render('nourrir/index', ['animals' => $animals,'alimentations'=>$alimentations]);
     }
 
     public function goUser(){
