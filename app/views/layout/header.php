@@ -1,5 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$indice = 0;
+$nav=['Utilisateurs','Animals','Alimentation','Ventes','Dashboard'];
+$nav_link = ['/user','/animal','/alimentation','/vente','/dashboard']
+if (!empty($_GET['indice'])){
+    $indice = $_GET['indice'];
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +14,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="/public/assets/css/header/css/style.css">
+	<link rel="stylesheet" href="/Elevage/public/assets/css/header/css/style.css">
 </head>
 
 <body>
@@ -22,11 +28,15 @@
 		      </button>
 		      <div class="collapse navbar-collapse" id="ftco-nav">
 		        <ul class="navbar-nav ml-auto mr-md-3">
-		        	<li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
-		        	<li class="nav-item"><a href="#" class="nav-link">About</a></li>
-		        	<li class="nav-item"><a href="#" class="nav-link">Work</a></li>
-		        	<li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-		          <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+                    <?php 
+                        for($i=0;$i<count($nav);$i++){
+                            if ($i == $indice){
+                    ?>
+                            <li class="nav-item active"><a href="<?php echo $nav_link[$i];?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
+                    <?php }else{ ?>
+                            <li class="nav-item"><a href="<?php echo $nav_link[$i];?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
+                    <?php } ?>
+                    <?php } ?>
 		        </ul>
 		      </div>
 		    </div>
@@ -35,10 +45,9 @@
 
 	</section>
 
-	<script src="/public/assets/css/header/js/jquery.min.js"></script>
-  <script src="/public/assets/css/header/js/popper.js"></script>
-  <script src="/public/assets/css/header/js/bootstrap.min.js"></script>
-  <script src="/public/assets/css/header/js/main.js"></script>
+	<script src="/Elevage/public/assets/css/header/js/jquery.min.js"></script>
+  <script src="/Elevage/public/assets/css/header/js/popper.js"></script>
+  <script src="/Elevage/public/assets/css/header/js/bootstrap.min.js"></script>
+  <script src="/Elevage/public/assets/css/header/js/main.js"></script>
 
 	</body>
-</html>
