@@ -103,3 +103,5 @@ CREATE TABLE
         date_creation DATE NOT NULL,
         FOREIGN KEY (id_user) REFERENCES users (id_user)
     );
+
+ALTER TABLE capital CHANGE montant_initial solde DECIMAL(15, 2) NOT NULL;
