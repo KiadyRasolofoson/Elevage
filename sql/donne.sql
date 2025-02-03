@@ -17,7 +17,7 @@ INSERT INTO animaux (id_espece, id_user, nom) VALUES
 
 -- Inserting test data into etat table
 INSERT INTO etat (id_animaux, date_etat, poids) VALUES
-(7, '2025-02-03', .50),
+(8, '2025-02-03', 6.50),
 (2, '2025-02-03', 9.50),
 (3, '2025-02-03', 200.00);
 
@@ -83,13 +83,11 @@ JOIN
 LEFT JOIN 
     ventes_animaux va ON a.id = va.animal_id
 LEFT JOIN 
-    etat et ON et.id_animaux = a.id 
-    AND et.date_etat = (SELECT MAX(e2.date_etat) 
-                        FROM etat e2 
-                        WHERE e2.id_animaux = a.id
-                        ORDER BY e2.id_etat DESC)
-GROUP BY 
-    a.id  -- Assurer une seule ligne par animal
+    etat et ON et.id_etat = (SELECT e2.id_etat
+                             FROM etat e2
+                             WHERE e2.id_animaux = a.id
+                             ORDER BY e2.date_etat DESC, e2.poids DESC
+                             LIMIT 1);
 
 
 
