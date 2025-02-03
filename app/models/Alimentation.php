@@ -11,7 +11,15 @@ class Alimentation {
         $this->db = $db;
     }
 
-    public function getAlimentation(){
-        
+    public function getAlimentaionById($alimentation_id)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM alimentations WHERE id = :id_alimentation');
+        $stmt->execute(['id_alimentation' => $alimentation_id]);
+        $alimentation = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+        if ($alimentation) {
+            return $alimentation;
+        }
+        return null;   
     }
 }

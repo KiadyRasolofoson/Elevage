@@ -1,7 +1,7 @@
 <?php
 
 namespace app\models;
-
+use app\model\Alimentation;
 use Flight;
 
 class NourirAnimalModel {
@@ -26,6 +26,8 @@ class NourirAnimalModel {
                 'date_nourriture' => $date_nourriture,
                 'quantite_nourriture' => $quantite_nourriture
             ]);
+            $alimentation=new Alimentation(Flight::db());
+            $poidsGagne=$quantite_nourriture*$alimentation['pourcentage_gain '];
 
          
             return true;
@@ -34,4 +36,5 @@ class NourirAnimalModel {
             return 'Erreur lors de l\'ajout : ' . $e->getMessage();
         }
     }
+   
 }
