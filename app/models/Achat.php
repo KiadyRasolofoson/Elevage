@@ -31,7 +31,7 @@ class Achat
             ]);
         }
 
-        $capitalModel = new Capital($db);
+        $capitalModel = new Capital($this->db);
         // Vérifier le capital de l'acheteur en utilisant la méthode getCapital() de la classe Capital
         $capital = $capitalModel->getCapital($idAcheteur); // Appel à la méthode getCapital
         $capital = json_decode($capital, true); // Décoder la réponse JSON
