@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Achat;
 use app\models\ProductModel;
 use app\models\Vente;
 use app\models\Users;
@@ -97,7 +98,11 @@ class UserController
 
     public function goAchat()
     {
-        Flight::render('achat/index');
+        $achat = new Achat(Flight::db());
+        $data = [
+            'achatsDisponibles' => $achat->getAchatDisponible()
+        ];
+        Flight::render('achat/index',$data);
     }
 
     public function goAlimentation()

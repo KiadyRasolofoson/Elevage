@@ -2,7 +2,7 @@
 
 namespace app\models;
 
-use Flight;
+use PDO;
 
 class Achat
 {
@@ -13,12 +13,45 @@ class Achat
         $this->db = $db;
     }
 
-    public function getAchat() {}
-
-    public function getAchatDisponible () {
-        
+    /**
+     * Récupère tous les achats disponibles (animaux non vendus).
+     *
+     * @return array
+     */
+    public function getAchatDisponible()
+    {
+        $query = "
+            SELECT 
+                va.id AS id_vente, 
+                va.date_vente, 
+                va.prix_vente, 
+                va.estVendu, 
+                a.id AS id_animal, 
+                a.nom AS nom_animal, 
+                e.nom AS espece 
+            FROM 
+                ventes_animaux va 
+            JOIN 
+                animaux a ON va.animal_id = a.id 
+            JOIN 
+                espece e ON a.id_espece = e.id 
+            WHERE 
+                va.estVendu = 0 
+            ORDER BY 
+                va.id;
+        ";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Effectue l'achat d'un animal par un utilisateur.
+     *
+     * @param int $idAcheteur L'ID de l'acheteur.
+     * @param int $id_animal_avendre L'ID de l'animal à vendre.
+     * @return string JSON contenant le résultat de l'opération.
+     */
     public function achat($idAcheteur, $id_animal_avendre)
     {
         // Vérifier si l'animal est disponible à la vente
@@ -35,10 +68,10 @@ class Achat
             ]);
         }
 
+        // Vérifier le capital de l'acheteur
         $capitalModel = new Capital($this->db);
-        // Vérifier le capital de l'acheteur en utilisant la méthode getCapital() de la classe Capital
-        $capital = $capitalModel->getCapital($idAcheteur); // Appel à la méthode getCapital
-        $capital = json_decode($capital, true); // Décoder la réponse JSON
+        $capital = $capitalModel->getCapital($idAcheteur);
+        $capital = json_decode($capital, true);
 
         // Si le capital est insuffisant
         if (!$capital['success'] || $capital['somme_capital'] < $vente['prix_vente']) {
@@ -68,11 +101,11 @@ class Achat
         $stmt->execute(['id_animal_avendre' => $id_animal_avendre]);
 
         // Déduire le prix de l'animal du capital de l'acheteur
-        $query = "INSERT INTO capital (id_user, solde, date_creation) VALUES (:id_user, :solde, NOW())";
+        $query = "UPDATE capital SET solde = solde - :prix_vente WHERE id_user = :idAcheteur";
         $stmt = $this->db->prepare($query);
         $stmt->execute([
-            'id_user' => $idAcheteur,            // Corrected the parameter name to match the SQL placeholder
-            'solde' => -$vente['prix_vente']    // The negative value for capital deduction
+            'prix_vente' => $vente['prix_vente'],
+            'idAcheteur' => $idAcheteur
         ]);
 
         return json_encode([

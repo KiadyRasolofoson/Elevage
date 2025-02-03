@@ -7,47 +7,41 @@ $base_url = Flight::app()->get('flight.base_url');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achat</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Import de jQuery -->
+    <title>Achats Disponibles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
+
     <?php include('app/views/layout/header.php'); ?>
     <div class="container">
-        <h1>Achat</h1>
-        <?php if (isset($listeAnimaux) && count($listeAnimaux) > 0) { ?>
-            <table class="table">
+        <h1>Achater des animaux</h1>
+        <?php if (!empty($achatsDisponibles)) { ?>
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <td>Id</td>
-                        <td>Nom</td>
-                        <td>Espèce</td>
-                        <td>Poids Minimal</td>
-                        <td>Poids Actuel</td>
-                        <td>Action</td>
+                        <th>ID Vente</th>
+                        <th>Date de Vente</th>
+                        <th>Prix de Vente</th>
+                        <th>Nom de l'Animal</th>
+                        <th>Espèce</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($listeAnimaux as $animal) { ?>
-                        <tr id="row-<?php echo $animal['animal_id']; ?>">
-                            <td><?php echo htmlspecialchars($animal['animal_id']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['animal_name']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['espece_name']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
-                            <td><?php echo htmlspecialchars($animal['poids_actuel']) ? htmlspecialchars($animal['poids_actuel']) . ' kg' : 'Non disponible'; ?></td>
-                            <td>
-                                <?php if ($animal['deja_dans_ventes'] != "Oui") { ?>
-                                    <button class="btn btn-primary vendre-btn" data-id="<?php echo $animal['animal_id']; ?>">Vendre</button>
-                                <?php } else { ?>
-                                    <span class="text-muted">Déjà en vente</span>
-                                <?php } ?>
-                            </td>
+                    <?php foreach ($achatsDisponibles as $achat) { ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($achat['id_vente']); ?></td>
+                            <td><?php echo htmlspecialchars($achat['date_vente']); ?></td>
+                            <td><?php echo htmlspecialchars($achat['prix_vente']); ?> €</td>
+                            <td><?php echo htmlspecialchars($achat['nom_animal']); ?></td>
+                            <td><?php echo htmlspecialchars($achat['espece']); ?></td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
         <?php } else { ?>
-            <p>Aucun animal disponible à acheter.</p>
+            <p>Aucun achat disponible pour le moment.</p>
         <?php } ?>
     </div>
 </body>
