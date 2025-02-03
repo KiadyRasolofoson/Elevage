@@ -11,13 +11,13 @@ INSERT INTO espece (nom, poids_minimal_vente, prix_kg, poids_maximal, jours_sans
 
 -- Inserting test data into animaux table
 INSERT INTO animaux (id_espece, id_user, nom) VALUES
-(1, 1, 'Rex'),
+(1, 1, 'Rexi'),
 (2, 1, 'Mittens'),
 (3, 2, 'Bessie');
 
 -- Inserting test data into etat table
 INSERT INTO etat (id_animaux, date_etat, poids) VALUES
-(8, '2025-02-03', 6.50),
+(9, '2025-02-03', 9.50),
 (2, '2025-02-03', 9.50),
 (3, '2025-02-03', 200.00);
 
@@ -87,7 +87,8 @@ LEFT JOIN
                              FROM etat e2
                              WHERE e2.id_animaux = a.id
                              ORDER BY e2.date_etat DESC, e2.poids DESC
-                             LIMIT 1);
+                             LIMIT 1)
+WHERE va.estVendu != 1;
 
 
 

@@ -49,7 +49,7 @@ $base_url = Flight::app()->get('flight.base_url');
         <?php } else { ?>
             <p>Aucun animal disponible à vendre.</p>
         <?php } ?>
-    </div>  
+    </div>
     <script>
         $(document).ready(function() {
             $(".vendre-btn").click(function() {

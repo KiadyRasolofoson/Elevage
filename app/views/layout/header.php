@@ -1,7 +1,7 @@
 <?php
 $indice = 0;
-$nav = ['Home', 'Animals', 'Alimentation', 'Ventes', 'Dashboard','Nourir'];
-$nav_link = ['/user', '/animal', '/alimentation', '/vente', '/dashboard','/nourrir'];
+$nav = ['Home', 'Animals', 'Alimentation', 'Vendre', 'Dashboard', 'Acheter', 'Nourir'];
+$nav_link = ['/user', '/animal', '/alimentation', '/vente', '/dashboard', 'Achater', '/nourrir'];
 $base_url = Flight::app()->get('flight.base_url');
 if (!empty($_GET['indice'])) {
 	$indice = $_GET['indice'];
@@ -13,9 +13,7 @@ if (!empty($_GET['indice'])) {
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
 	<link rel="stylesheet" href="/Elevage/public/assets/css/header/css/style.css">
 </head>
 
