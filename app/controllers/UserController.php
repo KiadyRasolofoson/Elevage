@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\ProductModel;
 use app\models\Vente;
 use app\models\Users;
+use app\models\Animal;
 use Flight;
 
 class UserController
@@ -57,7 +58,9 @@ class UserController
         Flight::redirect('dashboard');
     }
     public function nourrir(){
-        Flight::render('nourrir/index');
+        $animal=new Animal(Flight::db());
+        $animals=$animal->getAllAnimal();
+        Flight::render('nourrir/index', ['animals' => $animals]);
     }
 
     public function goUser(){

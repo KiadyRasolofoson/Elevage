@@ -37,4 +37,9 @@ class Animal
         
         return $animal['poids'] >= $animal['poids_minimal_vente'];
     }
+    public function getAllAnimal()
+    {
+        $stmt = $this->db->query('SELECT * FROM animaux');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }

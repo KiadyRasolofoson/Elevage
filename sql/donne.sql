@@ -1,7 +1,7 @@
 -- Inserting test data into users table
-INSERT INTO users (nom, password) VALUES
-('John Doe', 'password123'),
-('Jane Smith', 'securepass456');
+INSERT INTO users (id_user,nom, password) VALUES
+(1,'John Doe', 'password123'),
+(2,'Jane Smith', 'securepass456');
 
 -- Inserting test data into espece table
 INSERT INTO espece (nom, poids_minimal_vente, prix_kg, poids_maximal, jours_sans_manger, perte_poids_par_jour) VALUES
@@ -52,7 +52,7 @@ INSERT INTO nourrir_animaux (animal_id, alimentation_id, date_nourriture, quanti
 (3, 3, '2025-02-02', 20.00);
 
 -- Inserting test data into capital table
-INSERT INTO capital (id_user, montant_initial, date_creation) VALUES
+INSERT INTO capital (id_user, solde, date_creation) VALUES
 (1, 500.00, '2025-01-01'),
 (2, 1000.00, '2025-01-01');
 
