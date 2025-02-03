@@ -12,27 +12,73 @@ class Fonction {
     }
 
     public function insert($table, $data) {
-        // Vérification des paramètres
         if (empty($table) || empty($data)) {
             throw new \InvalidArgumentException("Le nom de la table et les données ne peuvent pas être vides.");
         }
-
-        // Préparation des colonnes et des valeurs pour la requête SQL
         $columns = implode(', ', array_keys($data));
         $placeholders = ':' . implode(', :', array_keys($data));
 
-        // Construction de la requête SQL
         $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
 
-        // Exécution de la requête
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($data);
-            return true; // Insertion réussie
+            return true; 
         } catch (\PDOException $e) {
-            // Gestion des erreurs (vous pouvez logger l'erreur ou la relancer)
             error_log("Erreur lors de l'insertion dans la table $table : " . $e->getMessage());
-            return false; // Insertion échouée
+            return false; 
+        }
+    }
+
+    public function update($table, $data, $conditions) {
+        if (empty($table) || empty($data) || empty($conditions)) {
+            throw new \InvalidArgumentException("Le nom de la table, les données et les conditions ne peuvent pas être vides.");
+        }
+
+        $setClause = [];
+        foreach ($data as $column => $value) {
+            $setClause[] = "$column = :$column";
+        }
+        $setClause = implode(', ', $setClause);
+
+        $whereClause = [];
+        foreach ($conditions as $column => $value) {
+            $whereClause[] = "$column = :where_$column";
+        }
+        $whereClause = implode(' AND ', $whereClause);
+
+        $sql = "UPDATE $table SET $setClause WHERE $whereClause";
+        $params = [];
+        foreach ($data as $column => $value) {
+            $params[":$column"] = $value;
+        }
+        foreach ($conditions as $column => $value) {
+            $params[":where_$column"] = $value;
+        }
+
+
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($params);
+            return true;
+        } catch (\PDOException $e) {
+            error_log("Erreur lors de la mise à jour dans la table $table : " . $e->getMessage());
+            return false; 
+        }
+    }
+
+    public function getAll($table){
+        if (empty($table)){
+            throw new \InvalidArgumentException("Le nom de la table, les données et les conditions ne peuvent pas être vides.");
+        }
+        $sql = "SELECT * FROM $table";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($params);
+            return true;
+        } catch (\PDOException $e) {
+            error_log("Erreur lors de la selection dans la table $table : " . $e->getMessage());
+            return false; 
         }
     }
 }
