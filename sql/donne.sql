@@ -17,7 +17,7 @@ INSERT INTO animaux (id_espece, id_user, nom) VALUES
 
 -- Inserting test data into etat table
 INSERT INTO etat (id_animaux, date_etat, poids) VALUES
-(7, '2025-02-03', .50),
+(8, '2025-02-03', 6.50),
 (2, '2025-02-03', 9.50),
 (3, '2025-02-03', 200.00);
 
