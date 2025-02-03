@@ -17,7 +17,6 @@ class VenteController
         $data = [
             'listeAnimaux' => $vente->getAll()
         ];
-        Flight::render('vendre/index');
+        Flight::render('vendre/index', $data);
     }
-
 }

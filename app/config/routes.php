@@ -21,6 +21,8 @@ use app\controllers\VenteController;
 $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
+$Vente_controller = new VenteController();
+
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
 Flight::route('POST /register', [$user_controller, 'register']);
@@ -30,7 +32,7 @@ FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 FLight::route('GET /user', [$user_controller, 'goUser']);
 FLight::route('GET /animal', [$user_controller, 'goAnimal']);
 FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
-FLight::route('GET /vente', [$user_controller, 'goVente']);
+FLight::route('GET /vente', [$Vente_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
