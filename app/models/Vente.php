@@ -11,7 +11,7 @@ class Vente {
         $this->db = $db;
     }
 
-    public function getVente(){
-        
+    public function vendre ($id_animal, $date_ventes) {
+
     }
 }
