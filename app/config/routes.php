@@ -4,6 +4,7 @@ use app\controllers\ApiExampleController;
 use app\controllers\WelcomeController;
 use flight\Engine;
 use flight\net\Router;
+use app\controllers\UserController;
 //use Flight;
 
 /** 
@@ -16,13 +17,13 @@ use flight\net\Router;
 });*/
 
 $Welcome_Controller = new WelcomeController();
-// $router->get('/', [ $Welcome_Controller, 'home' ]); 
+$user_controller = new UserController();
+
+
+ $router->get('/', [ $user_controller, 'goLogin' ]); 
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
-$router->get('/', function () {
-	echo '<h1>Hello world! Oh hey !</h1>';
-});
 
 $router->group('/api', function () use ($router, $app) {
 	$Api_Example_Controller = new ApiExampleController($app);
@@ -30,3 +31,4 @@ $router->group('/api', function () use ($router, $app) {
 	$router->get('/users/@id:[0-9]', [$Api_Example_Controller, 'getUser']);
 	$router->post('/users/@id:[0-9]', [$Api_Example_Controller, 'updateUser']);
 });
+
