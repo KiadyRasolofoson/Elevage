@@ -26,7 +26,7 @@ class Fonction
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($data);
-            return true;
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             error_log("Erreur lors de l'insertion dans la table $table : " . $e->getMessage());
             return false;
@@ -64,7 +64,7 @@ class Fonction
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($params);
-            return true;
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             error_log("Erreur lors de la mise à jour dans la table $table : " . $e->getMessage());
             return false;
