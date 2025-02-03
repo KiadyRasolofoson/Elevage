@@ -70,8 +70,12 @@ class UserController
         Flight::render('users/index');
     }
     public function goAnimal(){
-        Flight::render('animals/index');
-    }public function goDashboard(){
+        $animal=new Animal(Flight::db());
+        $animaux=$animal->getAllAnimal();
+        Flight::render('animals/index',['animaux'=>$animaux]);
+    }
+    
+    public function goDashboard(){
         Flight::render('Dashboard/index');
     }public function goVente(){
         $vente = new Vente(Flight::db());
