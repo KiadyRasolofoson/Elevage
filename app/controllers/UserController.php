@@ -28,6 +28,7 @@ class UserController
             // Stocker l'utilisateur dans la session
             session_start();
             $_SESSION['username'] = $username;
+            $_SESSION['user']=$userModel->getUserByUsername($username);
             Flight::redirect('dashboard');
         } else {
          
