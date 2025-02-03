@@ -28,7 +28,7 @@ $base_url = Flight::app()->get('flight.base_url');
             left: 0;
         }
 
-        .container {
+        .container1 {
             display: flex;
             justify-content: space-around;
             width: 100%;
@@ -66,7 +66,7 @@ $base_url = Flight::app()->get('flight.base_url');
 <body>
     <?php include('app/views/layout/header.php'); ?>
     <div class="user-name">Nom de l'utilisateur</div>
-    <div class="container">
+    <div class="container1">
         <div class="box"></div>
         <div class="box"></div>
         <div class="box"></div>
