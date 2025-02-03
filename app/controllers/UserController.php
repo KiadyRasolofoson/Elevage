@@ -7,6 +7,7 @@ use app\models\Vente;
 use app\models\Users;
 use app\models\Animal;
 use app\models\Alimentation;
+use app\models\Espece;
 use Flight;
 
 class UserController
@@ -90,8 +91,9 @@ class UserController
         Flight::render('alimentation/index', ['alimentations'=>$alimentations]);
     }
     public function ajoutAnimal(){
-        
-        Flight::render('animals/ajouter');
+        $espece=new Espece(Flight::db());
+        $especes=$espece->getAllEspece();
+        Flight::render('animals/ajouter',['especes'=>$especes]);
     }
 
 }
