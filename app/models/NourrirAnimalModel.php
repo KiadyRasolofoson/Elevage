@@ -1,11 +1,11 @@
 <?php
 
 namespace app\models;
-use app\model\Alimentation;
-use app\model\Etat;
+use app\models\Alimentation;
+use app\models\Etat;
 use Flight;
 
-class NourirAnimalModel {
+class NourrirAnimalModel {
     private $db;
 
     public function __construct($db){
@@ -29,7 +29,9 @@ class NourirAnimalModel {
             ]);
             $alimentation=new Alimentation(Flight::db());
             $etat=new Etat(Flight::db());
-            $poidsGagne=($etat['poids']*$alimentation['pourcentage_gain'])+$etat['poids'];
+            $e=$etat->getEtatByAnimalId($animal_id);
+            $al=$alimentation->getAlimentaionById($alimentation_id);
+            $poidsGagne=($e['poids']*$al['pourcentage_gain'])+$e['poids'];
             $etat-> addEtat($animal_id, $poidsGagne);
 
          
