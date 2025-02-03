@@ -13,6 +13,10 @@ class UserController
     public function loginForm() {
         Flight::render('auth/login');
     }
+    public function home() {
+        Flight::render('dashboard/index');
+    }
+
     public function login() {
         $data = Flight::request()->data;
         $username = $data->username;
@@ -24,7 +28,7 @@ class UserController
             // Stocker l'utilisateur dans la session
             session_start();
             $_SESSION['username'] = $username;
-            Flight::redirect('dashboard/index');
+            Flight::redirect('dashboard');
         } else {
          
             // Afficher une erreur
@@ -48,7 +52,7 @@ class UserController
         $_SESSION['user']=$userModel->getUserByUsername($username);
 
 
-        Flight::redirect('dashboard/index');
+        Flight::redirect('dashboard');
     }
 
 }
