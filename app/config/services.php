@@ -28,8 +28,3 @@ use app\models\ProductModel;
 // Redis? This is where you'd set that up
 // $app->register('redis', Redis::class, [ $config['redis']['host'], $config['redis']['port'] ]);
 
-
-
-Flight::map('productModel', function () {
-    return new ProductModel(Flight::db());
-});

@@ -19,9 +19,7 @@ use app\controllers\UserController;
 $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
-
- 
- Flight::route('/', [$user_controller, 'loginForm']);
+Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
@@ -33,4 +31,3 @@ $router->group('/api', function () use ($router, $app) {
 	$router->get('/users/@id:[0-9]', [$Api_Example_Controller, 'getUser']);
 	$router->post('/users/@id:[0-9]', [$Api_Example_Controller, 'updateUser']);
 });
-
