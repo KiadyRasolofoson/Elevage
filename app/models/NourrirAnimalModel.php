@@ -27,7 +27,7 @@ class NourirAnimalModel {
                 'quantite_nourriture' => $quantite_nourriture
             ]);
 
-            // Retourner un succès
+         
             return true;
         } catch (\PDOException $e) {
             // En cas d'erreur, afficher l'erreur
