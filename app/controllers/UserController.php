@@ -11,6 +11,7 @@ class UserController {
     }
 
     public function goLogin(){
+        echo "mety";
         Flight::render('auth/login');
     }
 }
