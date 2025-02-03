@@ -29,7 +29,7 @@ FLight::route('GET /user', [$user_controller, 'goUser']);
 FLight::route('GET /animal', [$user_controller, 'goAnimal']);
 FLight::route('GET /alimentation', [$user_controller, 'goAlimenation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
-FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
+FLight::route('GET /dashboard', [$user_controller, 'goDashboar']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 
