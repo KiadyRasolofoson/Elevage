@@ -23,18 +23,18 @@ class Vente
                 'message' => "L'animal n'est pas vendable à cette date."
             ]);
         }
-
         // Récupérer les informations nécessaires pour le prix de vente
+        // Sélectionner le dernier état de l'animal
         $query = "SELECT e.prix_kg, et.poids 
               FROM animaux a
               JOIN espece e ON a.id_espece = e.id
               JOIN etat et ON et.id_animaux = a.id
-              WHERE a.id = :id_animal AND et.date_etat = :date";
+              WHERE a.id = :id_animal
+              ORDER BY et.date_etat DESC LIMIT 1";  // Prendre le dernier état
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([
-            'id_animal' => $id_animal,
-            'date' => $date_ventes
+            'id_animal' => $id_animal
         ]);
         $animal = $stmt->fetch();
 
