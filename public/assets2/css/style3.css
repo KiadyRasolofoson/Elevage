@@ -1,0 +1,123 @@
+/* Styles généraux */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #f2f8ff, #d5e8f8);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* Titres */
+h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #b22222;
+    text-shadow: 1px 1px 3px #f8d7da;
+}
+
+/* Conteneur principal pour chaque catégorie */
+.col-md-6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Conteneur des cartes (ligne horizontale) */
+.card-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 10px 20px;
+    scrollbar-width: thin; /* Pour navigateur compatible */
+}
+
+/* Style des cartes cadeaux */
+.thumbnail {
+    flex: 0 0 auto; /* Empêche l'expansion des cartes */
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-color: #fff;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.thumbnail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Images */
+.thumbnail img {
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Texte des cartes */
+.caption {
+    padding: 15px;
+    text-align: center;
+}
+
+.caption h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.caption p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+/* Boutons */
+.caption a.btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.caption a.btn-primary {
+    background-color: #ff6b6b;
+    border: none;
+}
+
+.caption a.btn-primary:hover {
+    background-color: #ff5252;
+}
+
+.caption a.btn-default {
+    background-color: #4caf50;
+    border: none;
+}
+
+.caption a.btn-default:hover {
+    background-color: #45a049;
+}
+#valider{
+    text-align: center;
+    color: blue;
+  
+}
+/* Responsivité */
+@media (max-width: 768px) {
+    .card-container {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .thumbnail {
+        width: 90%;
+    }
+}
