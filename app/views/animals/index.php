@@ -32,8 +32,8 @@ $base_url = Flight::app()->get('flight.base_url');
                                 <td><?= htmlspecialchars($animal['nom']) ?></td>
                                 <td><?= htmlspecialchars($animal['id_espece']) ?></td>
                                 <td>
-                                    <a href="<?= $base_url ?>/nourrir-animal/<?= $animal['id'] ?>" class="btn btn-warning btn-sm">Nourrir</a>
-                                    <a href="<?= $base_url ?>/vendre-animal/<?= $animal['id'] ?>" class="btn btn-danger btn-sm">Vendre</a>
+                                    <a href="<?= $base_url ?>/nourrir-animal/idAnimal<?= $animal['id'] ?>" class="btn btn-warning btn-sm">Nourrir</a>
+                                   
                                 </td>
                             </tr>
                         <?php endforeach; ?>
