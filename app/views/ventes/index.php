@@ -1,8 +1,6 @@
 <?php
 $base_url = Flight::app()->get('flight.base_url');
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +12,9 @@ $base_url = Flight::app()->get('flight.base_url');
 
 <body>
     <?php include('app/views/layout/header.php'); ?>
+    <div class="container">
+        <h1>Vendre</h1>
+    </div>
 </body>
 
 </html>

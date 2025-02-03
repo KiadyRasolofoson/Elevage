@@ -74,7 +74,7 @@ class Fonction {
         $sql = "SELECT * FROM $table";
         try {
             $stmt = $this->db->prepare($sql);
-            $stmt->execute($params);
+            $stmt->execute();
             return true;
         } catch (\PDOException $e) {
             error_log("Erreur lors de la selection dans la table $table : " . $e->getMessage());
