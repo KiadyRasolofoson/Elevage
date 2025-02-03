@@ -5,6 +5,8 @@ use app\controllers\WelcomeController;
 use flight\Engine;
 use flight\net\Router;
 use app\controllers\UserController;
+use app\controllers\VenteController;
+
 //use Flight;
 
 /** 
@@ -25,6 +27,10 @@ Flight::route('POST /register', [$user_controller, 'register']);
 Flight::route('GET /register', [$user_controller, 'registerForm']);
 Flight::route('GET /dashboard', [$user_controller, 'home']);
 FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
+
+$Vente_Controller = new VenteController();
+
+FLight::route('GET /vendre', [$Vente_Controller, 'goVente']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 

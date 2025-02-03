@@ -2,7 +2,7 @@
 $indice = 0;
 $nav=['Utilisateurs','Animals','Alimentation','Ventes','Dashboard'];
 $nav_link = ['/user','/animal','/alimentation','/vente','/dashboard']
-if (!empty($_GET['indice'])){
+if (!empty($GET['indice'])){
     $indice = $_GET['indice'];
 }
 ?>

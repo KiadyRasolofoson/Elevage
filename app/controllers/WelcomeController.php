@@ -12,7 +12,6 @@ class WelcomeController
 
     public function home()
     {
-       
         Flight::render('layout/header');
     }
 }
