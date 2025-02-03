@@ -28,10 +28,6 @@ Flight::route('GET /register', [$user_controller, 'registerForm']);
 Flight::route('GET /dashboard', [$user_controller, 'home']);
 FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 
-$Vente_Controller = new VenteController();
-
-FLight::route('GET /vendre', [$Vente_Controller, 'goVente']);
-
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 

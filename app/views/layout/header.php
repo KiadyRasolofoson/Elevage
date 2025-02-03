@@ -2,7 +2,7 @@
 $indice = 0;
 $nav=['Utilisateurs','Animals','Alimentation','Ventes','Dashboard'];
 $nav_link = ['/user','/animal','/alimentation','/vente','/dashboard']
-if (!empty($GET['indice'])){
+if (!empty($_GET['indice'])){
     $indice = $_GET['indice'];
 }
 ?>
@@ -32,9 +32,9 @@ if (!empty($GET['indice'])){
                         for($i=0;$i<count($nav);$i++){
                             if ($i == $indice){
                     ?>
-                            <li class="nav-item active"><a href="<?php echo $nav_link[$i];?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
+                            <li class="nav-item active"><a href="<?php echo $nav_link[$i].'?indice='.$i;?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
                     <?php }else{ ?>
-                            <li class="nav-item"><a href="<?php echo $nav_link[$i];?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
+                            <li class="nav-item"><a href="<?php echo $nav_link[$i].'?indice='.$i;?>" class="nav-link" style="font-size:larger;"><?php echo $nav[$i]; ?></a></li>
                     <?php } ?>
                     <?php } ?>
 		        </ul>
