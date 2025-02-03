@@ -20,7 +20,7 @@ FROM
             e2.id_animaux = a.id
         ORDER BY
             e2.date_etat DESC,
-            e2.poids DESC
+            e2.id_etat DESC
         LIMIT
             1
     )

@@ -47,6 +47,9 @@ Flight::route('POST /nourrir', [$nourrir_controller, 'nourrir']);
 FLight::route('GET /ajouter-animal', [$user_controller, 'ajoutAnimal']);
 FLight::route('POST /ajouter-animal', [$animal_controller, 'ajouter']);
 
+FLight::route('GET /achat', [$user_controller, 'goAchat']);
+
+
 Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
