@@ -56,6 +56,9 @@ class UserController
 
         Flight::redirect('dashboard');
     }
+    public function nourrir(){
+        Flight::render('nourrir/index');
+    }
 
     public function goUser(){
         Flight::render('users/index');

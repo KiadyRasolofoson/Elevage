@@ -6,6 +6,7 @@ use flight\Engine;
 use flight\net\Router;
 use app\controllers\UserController;
 use app\controllers\VenteController;
+use app\controllers\NourrirController;
 
 //use Flight;
 
@@ -34,6 +35,7 @@ FLight::route('GET /animal', [$user_controller, 'goAnimal']);
 FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
+FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
