@@ -34,6 +34,7 @@ class Users {
             'username' => $username,
             'password' => $password,
         ]);
+        $capital= new Capital();
 
   
     }
