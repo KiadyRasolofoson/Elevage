@@ -60,8 +60,6 @@ class UserController
         $userModel = new Users(Flight::db());
         $userModel->register($username, $password, $balance);
         $_SESSION['user'] = $userModel->getUserByUsername($username);
-
-
         Flight::redirect('dashboard');
     }
     public function nourrir()

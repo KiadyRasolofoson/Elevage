@@ -15,6 +15,10 @@ class Achat
 
     public function getAchat() {}
 
+    public function getAchatDisponible () {
+        
+    }
+
     public function achat($idAcheteur, $id_animal_avendre)
     {
         // Vérifier si l'animal est disponible à la vente

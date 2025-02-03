@@ -55,7 +55,6 @@ $base_url = Flight::app()->get('flight.base_url');
             $(".vendre-btn").click(function() {
                 let id_animal = $(this).data("id");
                 let button = $(this);
-                console.log("<?php echo $base_url; ?>/vente/vendre/" + id_animal);
                 $.ajax({
                     url: "<?php echo $base_url; ?>/vente/vendre/" + id_animal,
                     type: "POST",

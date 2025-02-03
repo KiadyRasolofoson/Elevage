@@ -4,6 +4,7 @@ namespace app\models;
 
 use app\models\Fonction;
 use Flight;
+use Exception;
 
 class Vente
 {
@@ -16,8 +17,25 @@ class Vente
 
     public function getAll()
     {
+        // Démarrer la session
+        session_start();
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['user']['id_user'])) {
+            throw new Exception("Utilisateur non connecté.");
+        }
+        // Récupérer l'ID de l'utilisateur connecté
+        $id_user = $_SESSION['user']['id_user'];
+        // Créer une instance de la classe Fonction
         $fonction = new Fonction($this->db);
-        return $fonction->getAll('animaux_avec_ventes');
+        // Récupérer tous les animaux de la vue
+        $animaux = $fonction->getAll('animaux_avec_ventes');
+        // Appliquer un filtre supplémentaire sur les résultats
+        $animaux_filtres = array_filter($animaux, function ($animal) use ($id_user) {
+            // Filtrer les animaux pour ne retourner que ceux de l'utilisateur connecté
+            return $animal['id_user'] == $id_user;
+        });
+        // Retourner les résultats filtrés
+        return $animaux_filtres;
     }
 
     public function vendre($id_animal, $date_ventes)
