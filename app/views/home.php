@@ -6,6 +6,8 @@
             <img src="/assets/images/1.jpg" alt="Produit 1">
             <h2>Produit 1</h2>
             <p>Prix : 160 000Ar</p>
+
+            <p>Hello</p>
         </a>
     </article>
     <?php } ?>
