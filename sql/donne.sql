@@ -68,16 +68,24 @@ SELECT * FROM nourritures;
 SELECT * FROM nourrir_animaux;
 SELECT * FROM capital;
 
-CREATE VIEW animaux_avec_ventes AS
+CREATE OR REPLACE VIEW animaux_avec_ventes AS
 SELECT 
     a.id AS animal_id,
     a.nom AS animal_name,
     e.nom AS espece_name,
-    IF(va.id IS NOT NULL, 'Oui', 'Non') AS deja_dans_ventes
+    e.poids_minimal_vente AS poids_minimal_vente,  -- Poids minimal de vente de l'espèce
+    IFNULL(et.poids, 0) AS poids_actuel,  -- Poids actuel de l'animal, si NULL mettre 0
+    IF(va.id IS NOT NULL, 'Oui', 'Non') AS deja_dans_ventes  -- Si l'animal est déjà dans la vente
 FROM 
     animaux a
 JOIN 
     espece e ON a.id_espece = e.id
 LEFT JOIN 
-    ventes_animaux va ON a.id = va.animal_id;
+    ventes_animaux va ON a.id = va.animal_id
+LEFT JOIN 
+    etat et ON et.id_animaux = a.id 
+    AND et.date_etat = (SELECT MAX(e2.date_etat) 
+                        FROM etat e2 
+                        WHERE e2.id_animaux = a.id);
+
 
