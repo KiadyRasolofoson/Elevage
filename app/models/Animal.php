@@ -34,7 +34,7 @@ class Animal
         if (!$animal) {
             return false; // L'animal ou l'état à la date donnée n'existe pas
         }
-
+        
         return $animal['poids'] >= $animal['poids_minimal_vente'];
     }
 }
