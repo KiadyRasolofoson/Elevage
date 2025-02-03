@@ -18,13 +18,13 @@ $base_url = Flight::app()->get('flight.base_url');
         <h1 class="mb-4">Nourrir un animal</h1>
 
         <!-- Formulaire pour nourrir un animal -->
-        <form action="<?= $base_url ?>/nourrir/ajouter" method="POST">
+        <form action="<?= $base_url ?>/nourrir" method="POST">
             <!-- Sélection de l'animal -->
             <div class="mb-3">
                 <label for="animal_id" class="form-label">Sélectionner un animal</label>
                 <select class="form-select" id="animal_id" name="animal_id" required>
                     <option value="">Choisir un animal</option>
-                    <?php foreach ($animaux as $animal) : ?>
+                    <?php foreach ($animals as $animal) : ?>
                         <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
                     <?php endforeach; ?>
                 </select>

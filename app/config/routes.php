@@ -23,6 +23,7 @@ $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
 $Vente_controller = new VenteController();
+$nourrir_controller=new NourrirController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
@@ -36,6 +37,7 @@ FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
 FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
+Flight::route('POST /nourrir', [$nourrir_controller, 'nourrir']);
 
 Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 

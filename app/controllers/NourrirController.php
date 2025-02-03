@@ -2,22 +2,21 @@
 
 namespace app\controllers;
 
-use app\models\NourirAnimalModel;
+use app\models\NourrirAnimalModel;
 
 use Flight;
 
 class NourrirController
 {
-    private $nourrirModel;
-
     public function __construct()
     {
-        $this->nourrirModel = new NourirAnimalModel(Flight::db());
+        
     }
 
     public function nourrir()
     {
         // Récupération des données envoyées par le client (POST ou JSON)
+        $nourrirModel = new NourrirAnimalModel(Flight::db());
         $request = Flight::request();
         $data = $request->data;
 
@@ -28,7 +27,7 @@ class NourrirController
         }
 
         // Appel à la méthode ajout du modèle
-        $result = $this->nourrirModel->ajout(
+        $result = $nourrirModel->ajout(
             $data->animal_id,
             $data->alimentation_id,
             $data->date_nourriture,
@@ -40,7 +39,7 @@ class NourrirController
            
         
             Flight::json(['success' => 'L\'animal a été nourri avec succès']);
-            Flight::redirect('dashboard');
+            Flight::redirect('dashboard/index');
         } else {
             Flight::json(['error' => $result], 500);
         }
