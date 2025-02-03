@@ -18,15 +18,18 @@ class Vente
         // Vérifier si l'animal est vendable
         $animalModel = new Animal($this->db);
         if (!$animalModel->estVendable($id_animal, $date_ventes)) {
-            return "L'animal n'est pas vendable à cette date.";
+            return json_encode([
+                'success' => false,
+                'message' => "L'animal n'est pas vendable à cette date."
+            ]);
         }
 
         // Récupérer les informations nécessaires pour le prix de vente
         $query = "SELECT e.prix_kg, et.poids 
-                  FROM animaux a
-                  JOIN espece e ON a.id_espece = e.id
-                  JOIN etat et ON et.id_animaux = a.id
-                  WHERE a.id = :id_animal AND et.date_etat = :date";
+              FROM animaux a
+              JOIN espece e ON a.id_espece = e.id
+              JOIN etat et ON et.id_animaux = a.id
+              WHERE a.id = :id_animal AND et.date_etat = :date";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([
@@ -36,7 +39,10 @@ class Vente
         $animal = $stmt->fetch();
 
         if (!$animal) {
-            return "Impossible de récupérer les informations de l'animal.";
+            return json_encode([
+                'success' => false,
+                'message' => "Impossible de récupérer les informations de l'animal."
+            ]);
         }
 
         // Calculer le prix de vente (poids * prix_kg)
@@ -44,7 +50,7 @@ class Vente
 
         // Insérer la vente dans la table ventes_animaux
         $query = "INSERT INTO ventes_animaux (animal_id, date_vente, prix_vente) 
-                  VALUES (:id_animal, :date_ventes, :prix_vente)";
+              VALUES (:id_animal, :date_ventes, :prix_vente)";
         $stmt = $this->db->prepare($query);
         $stmt->execute([
             'id_animal' => $id_animal,
@@ -52,6 +58,14 @@ class Vente
             'prix_vente' => $prix_vente
         ]);
 
-        return "L'animal a été vendu avec succès pour $prix_vente €.";
+        return json_encode([
+            'success' => true,
+            'message' => "L'animal a été vendu avec succès.",
+            'data' => [
+                'id_animal' => $id_animal,
+                'date_vente' => $date_ventes,
+                'prix_vente' => $prix_vente
+            ]
+        ]);
     }
 }
