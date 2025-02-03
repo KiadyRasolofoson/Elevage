@@ -6,7 +6,7 @@ use app\models\Alimentation;
 
 use Flight;
 
-class AlimemtationController
+class AlimentationController
 {
     public function __construct()
     {
@@ -27,19 +27,17 @@ class AlimemtationController
         }
 
         // Appel à la méthode ajout du modèle
-        $result = $alimentation->ajout(
-            $data->animal_id,
-            $data->alimentation_id,
-            $data->date_nourriture,
-            $data->quantite_nourriture
+        $result = $alimentation->add(
+            $data->pourcentage_gain,
+            $data->nom
         );
 
         // Réponse JSON
         if ($result === true) {
            
         
-            Flight::json(['success' => 'L\'animal a été nourri avec succès']);
-            Flight::redirect('dashboard');
+            Flight::json(['success' => 'L\'alimentation a été inserer avec succès']);
+            Flight::redirect('alimentation');
         } else {
             Flight::json(['error' => $result], 500);
         }

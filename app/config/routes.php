@@ -7,6 +7,8 @@ use flight\net\Router;
 use app\controllers\UserController;
 use app\controllers\VenteController;
 use app\controllers\NourrirController;
+use app\controllers\AlimentationController;
+
 
 //use Flight;
 
@@ -24,6 +26,7 @@ $user_controller = new UserController();
 
 $Vente_controller = new VenteController();
 $nourrir_controller=new NourrirController();
+$alimentation_controller=new AlimentationController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
@@ -34,6 +37,7 @@ FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 FLight::route('GET /user', [$user_controller, 'goUser']);
 FLight::route('GET /animal', [$user_controller, 'goAnimal']);
 FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
+FLight::route('POST /alimentation', [$alimentation_controller, 'alimentation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
 FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
 FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
