@@ -2,6 +2,7 @@
 
 namespace app\models;
 use app\model\Alimentation;
+use app\model\Etat;
 use Flight;
 
 class NourirAnimalModel {
@@ -27,7 +28,9 @@ class NourirAnimalModel {
                 'quantite_nourriture' => $quantite_nourriture
             ]);
             $alimentation=new Alimentation(Flight::db());
-            $poidsGagne=$quantite_nourriture*$alimentation['pourcentage_gain '];
+            $etat=new Etat(Flight::db());
+            $poidsGagne=($etat['poids']*$alimentation['pourcentage_gain'])+$etat['poids'];
+            $etat-> addEtat($animal_id, $poidsGagne);
 
          
             return true;

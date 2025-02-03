@@ -21,6 +21,8 @@ use app\controllers\VenteController;
 $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
+$Vente_controller = new VenteController();
+
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
 Flight::route('POST /register', [$user_controller, 'register']);
