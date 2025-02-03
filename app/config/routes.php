@@ -20,7 +20,9 @@ $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
 
- $router->get('/', [ $user_controller, 'goLogin' ]); 
+ 
+ Flight::route('/', [$user_controller, 'loginForm']);
+Flight::route('POST /login', [$user_controller, 'login']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 

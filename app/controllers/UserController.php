@@ -9,8 +9,7 @@ class UserController
 {
     public function __construct__() {}
 
-    public function goLogin()
-    {
-        Flight::render('auth/login');
+    public function loginForm() {
+        Flight::render('login');
     }
 }
