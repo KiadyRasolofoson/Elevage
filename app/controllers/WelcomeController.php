@@ -12,7 +12,7 @@ class WelcomeController
 
     public function home()
     {
-        $data = ['nom' => "oke"];
-        Flight::render('welcome', $data);
+       
+        Flight::render('layout/header');
     }
 }
