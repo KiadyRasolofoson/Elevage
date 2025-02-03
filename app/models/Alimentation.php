@@ -22,4 +22,9 @@ class Alimentation {
         }
         return null;   
     }
+    public function getAllAlimentation()
+    {
+        $stmt = $this->db->query('SELECT * FROM alimentations');
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
