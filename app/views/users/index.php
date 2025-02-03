@@ -146,15 +146,15 @@ $base_url = Flight::app()->get('flight.base_url');
     <div class="container1">
         <a class="box">
             <h2>Ajouter Balance</h2>
-            <p>Voici votre balance actuel : <?php echo $_SESSION['user']['balance']; ?></p>
+            <p>Voici votre balance actuel : <?php //echo $_SESSION['user']['balance']; ?></p>
         </a>
         <a class="box">
-            <h2>Titre 2</h2>
-            <p>Description pour la deuxième boîte...</p>
+            <h2>Mes Animals</h2>
+            <p>Regarder l'etat de vos animaux.</p>
         </a>
         <a class="box">
-            <h2>Titre 3</h2>
-            <p>Description pour la troisième boîte...</p>
+            <h2>Mes Ventes</h2>
+            <p>Regarder les status de vos ventes.</p>
         </a>
     </div>
 </body>
