@@ -45,9 +45,9 @@ class Users {
             'username' => $username,
             'password' => $password,
         ]);
-        $capital= new Capital(Flight::db());
+        $capi= new Capital(Flight::db());
         $id_user=$this->getIdByUsername($username);
-        $capital->modifierCapital($id_user, $capital);
+        $capi->modifierCapital($id_user, $capital);
 
   
     }
