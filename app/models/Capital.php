@@ -42,5 +42,9 @@ class Capital
             'id_user' => $id_user,
             'solde' => $montant
         ]);
+        return json_encode([
+            'success' => true,
+            'message' => "Capital modifié avec succès."
+        ]);
     }
 }
