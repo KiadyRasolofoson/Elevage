@@ -10,6 +10,6 @@ class UserController
     public function __construct__() {}
 
     public function loginForm() {
-        Flight::render('login');
+        Flight::render('auth/login');
     }
 }
