@@ -1,7 +1,7 @@
 <?php
 $indice = 0;
-$nav = ['Home', 'Animals', 'Alimentation', 'Ventes', 'Dashboard','Nourir'];
-$nav_link = ['/user', '/animal', '/alimentation', '/vente', '/dashboard','/nourrir'];
+$nav = ['Home', 'Animals', 'Alimentation', 'Vendre', 'Dashboard', 'Acheter', 'Nourir'];
+$nav_link = ['/user', '/animal', '/alimentation', '/vente', '/dashboard', 'Achater', '/nourrir'];
 $base_url = Flight::app()->get('flight.base_url');
 if (!empty($_GET['indice'])) {
 	$indice = $_GET['indice'];
