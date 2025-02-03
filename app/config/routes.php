@@ -8,6 +8,7 @@ use app\controllers\UserController;
 use app\controllers\VenteController;
 use app\controllers\NourrirController;
 use app\controllers\AlimentationController;
+use app\controllers\AnimalController;
 
 
 //use Flight;
@@ -27,6 +28,7 @@ $user_controller = new UserController();
 $Vente_controller = new VenteController();
 $nourrir_controller=new NourrirController();
 $alimentation_controller=new AlimentationController();
+$animal_controller=new AnimalController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
@@ -43,7 +45,7 @@ FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
 FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
 Flight::route('POST /nourrir', [$nourrir_controller, 'nourrir']);
 FLight::route('GET /ajouter-animal', [$user_controller, 'ajoutAnimal']);
-
+FLight::route('POST /ajouter-animal', [$animal_controller, 'ajouter']);
 
 Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 

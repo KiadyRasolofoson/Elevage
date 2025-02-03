@@ -27,9 +27,13 @@ $base_url = Flight::app()->get('flight.base_url');
                         <?php endforeach; ?>
                     </select>
                 </div>
+                 <div class="mb-3">
+                    <label for="poids" class="form-label">Poids initial</label>
+                    <input type="number" id="poids" name="poids" class="form-control" required>
+                </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">Ajouter</button>
-                    <a href="<?= $base_url ?>/animaux" class="btn btn-secondary">Annuler</a>
+                    <a href="<?= $base_url ?>/ajouter-animal" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
         </div>

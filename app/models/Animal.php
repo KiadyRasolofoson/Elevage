@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\models\Etat;
 
 use Flight;
 
@@ -14,6 +15,17 @@ class Animal
     }
 
     public function getAnimal() {}
+     public function getAnimalByNom($nom)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM animaux WHERE nom= :nom');
+        $stmt->execute(['nom' => $nom]);
+        $animal = $stmt->fetch(\PDO::FETCH_ASSOC);
+    
+        if ($animal) {
+            return $animal;
+        }
+        return null;   
+    }
 
     public function estVendable($id_animal, $date)
     {
@@ -47,5 +59,27 @@ class Animal
     {
         $stmt = $this->db->query('SELECT * FROM animaux');
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+    public function add($id_espece,$nom,$poids)
+    {
+         try {
+            // Préparation de la requête SQL pour insérer un enregistrement dans la table nourrir_animaux
+            $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom) 
+                                        VALUES (:id_espece, :nom)');
+
+            // Exécution de la requête avec les paramètres fournis
+            $stmt->execute([
+                'id_espece' => $id_espece,
+                'nom' => $nom
+            ]);
+            $animal=$this->getAnimalByNom($nom);
+            $etat=new Etat(Flight::db());
+            $etat->addEtat($animal['id'], $poids);
+         
+            return true;
+        } catch (\PDOException $e) {
+            // En cas d'erreur, afficher l'erreur
+            return 'Erreur lors de l\'ajout : ' . $e->getMessage();
+        }
     }
 }
