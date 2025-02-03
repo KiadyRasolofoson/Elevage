@@ -21,6 +21,7 @@ $user_controller = new UserController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
+FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
