@@ -15,6 +15,7 @@ $base_url = Flight::app()->get('flight.base_url');
     <?php include('app/views/layout/header.php'); ?>
     <div class="container">
         <h1>Achat</h1>
+        
     </div>
 </body>
 
