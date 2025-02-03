@@ -55,4 +55,6 @@ class UserController
         Flight::redirect('dashboard');
     }
 
+    
+
 }
