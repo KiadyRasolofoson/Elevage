@@ -66,7 +66,7 @@ button:hover {
 
         <!-- Formulaire d'ajout d'alimentation -->
         <h2>Ajouter un nouvel aliment</h2>
-        <form action="<?php echo $base_url; ?>/alimentations/add" method="POST">
+        <form action="<?php echo $base_url; ?>/alimentations" method="POST">
             <div>
                 <label for="nom">Nom de l'aliment:</label>
                 <input type="text" id="nom" name="nom" required>
