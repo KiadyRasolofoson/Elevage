@@ -1,6 +1,5 @@
 <?php
 $base_url = Flight::app()->get('flight.base_url');
-
 ?>
 
 <!DOCTYPE html>
