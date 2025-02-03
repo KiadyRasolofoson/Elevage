@@ -83,10 +83,15 @@ class UserController
             'listeAnimaux' => $vente->getAll()
         ];
         Flight::render('ventes/index',$data);
-    }public function goAlimentation(){
+    }
+    public function goAlimentation(){
         $alimentation=new Alimentation(Flight::db());
         $alimentations=$alimentation->getAllAlimentation();
         Flight::render('alimentation/index', ['alimentations'=>$alimentations]);
+    }
+    public function ajoutAnimal(){
+        
+        Flight::render('animals/ajouter');
     }
 
 }
