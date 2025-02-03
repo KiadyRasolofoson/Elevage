@@ -70,7 +70,7 @@ if (Debugger::$showBar && php_sapi_name() !== 'cli') {
 return [
 	'database' => [
 		// uncomment the below 4 lines for mysql
-		 'host' => 'localhost:8889',
+		 'host' => 'localhost',
 		 'dbname' => 'elevage',
 		 'user' => 'root',
 		 'password' => ''
