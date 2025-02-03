@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ProductModel;
+use app\models\Vente;
 use app\models\Users;
 use Flight;
 
@@ -64,7 +65,11 @@ class UserController
     }public function goDashboard(){
         Flight::render('Dashboard/index');
     }public function goVente(){
-        Flight::render('ventes/index');
+        $vente = new Vente(Flight::db());
+        $data = [
+            'listeAnimaux' => $vente->getAll()
+        ];
+        Flight::render('ventes/index',$data);
     }public function goAlimentation(){
         Flight::render('alimentation/index');
     }

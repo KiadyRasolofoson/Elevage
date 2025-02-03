@@ -4,14 +4,17 @@ namespace app\models;
 
 use Flight;
 
-class Fonction {
+class Fonction
+{
     private $db;
 
-    public function __construct($db) {
-        $this->db = $db; 
+    public function __construct($db)
+    {
+        $this->db = $db;
     }
 
-    public function insert($table, $data) {
+    public function insert($table, $data)
+    {
         if (empty($table) || empty($data)) {
             throw new \InvalidArgumentException("Le nom de la table et les données ne peuvent pas être vides.");
         }
@@ -23,14 +26,15 @@ class Fonction {
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute($data);
-            return true; 
+            return true;
         } catch (\PDOException $e) {
             error_log("Erreur lors de l'insertion dans la table $table : " . $e->getMessage());
-            return false; 
+            return false;
         }
     }
 
-    public function update($table, $data, $conditions) {
+    public function update($table, $data, $conditions)
+    {
         if (empty($table) || empty($data) || empty($conditions)) {
             throw new \InvalidArgumentException("Le nom de la table, les données et les conditions ne peuvent pas être vides.");
         }
@@ -63,23 +67,23 @@ class Fonction {
             return true;
         } catch (\PDOException $e) {
             error_log("Erreur lors de la mise à jour dans la table $table : " . $e->getMessage());
-            return false; 
+            return false;
         }
     }
 
-    public function getAll($table){
-        if (empty($table)){
+    public function getAll($table)
+    {
+        if (empty($table)) {
             throw new \InvalidArgumentException("Le nom de la table, les données et les conditions ne peuvent pas être vides.");
         }
         $sql = "SELECT * FROM $table";
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
-            return true;
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             error_log("Erreur lors de la selection dans la table $table : " . $e->getMessage());
-            return false; 
+            return false;
         }
     }
-
 }
