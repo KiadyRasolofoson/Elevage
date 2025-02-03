@@ -80,7 +80,9 @@ class UserController
         ];
         Flight::render('ventes/index',$data);
     }public function goAlimentation(){
-        Flight::render('alimentation/index');
+        $alimentation=new Alimentation(Flight::db());
+        $alimentations=$alimentation->getAllAlimentation();
+        Flight::render('alimentation/index', ['alimentations'=>$alimentations]);
     }
 
 }
