@@ -102,6 +102,17 @@
             transform: translateY(-2px);
         }
 
+        .btn-danger {
+            background-color: #B22222;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #9b1f1f;
+            transform: translateY(-2px);
+        }
+
         .d-grid {
             display: grid;
             gap: 1rem;
@@ -177,10 +188,14 @@
     <div class="container mt-4">
         <div class="card shadow-lg p-4">
             <h2 class="text-center text-primary">Acheter animal</h2>
-            <form action="<?= $base_url ?>/ajouter-animal" method="POST">
+            <form action="<?= $base_url ?>/ajouter-animal" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="nom" class="form-label">Nom de l'Animal</label>
                     <input type="text" id="nom" name="nom" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input type="file" id="image" name="image" class="form-control" required>
                 </div>
                 <div class="mb-3">
                     <label for="id_espece" class="form-label">Espèce</label>
@@ -196,14 +211,14 @@
                     <input type="number" id="poids" name="poids" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="id_espece" class="form-label">Autovente</label>
-                    <select id="id_espece" name="autovente" class="form-select" required>
+                    <label for="autovente" class="form-label">Autovente</label>
+                    <select id="autovente" name="autovente" class="form-select" required>
                         <option value="0">False</option>
                         <option value="1">True</option>
                     </select>
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="submit" class="button" style="background-color: #B22222;">Ajouter</button>
+                    <button type="submit" class="btn btn-danger">Ajouter</button>
                     <a href="<?= $base_url ?>/animal" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
