@@ -87,6 +87,7 @@ class UserController
     {
         Flight::render('Dashboard/index');
     }
+    
     public function goVente()
     {
         $vente = new Vente(Flight::db());
@@ -102,7 +103,7 @@ class UserController
         $data = [
             'achatsDisponibles' => $achat->getAchatDisponible()
         ];
-        Flight::render('achat/index',$data);
+        Flight::render('achat/index', $data);
     }
 
     public function goAlimentation()
