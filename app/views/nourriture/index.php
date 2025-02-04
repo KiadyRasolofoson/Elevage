@@ -135,40 +135,7 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .card h2 {
-                font-size: 1.75rem;
-            }
-
-            .form-control,
-            .form-select {
-                padding: 0.5rem;
-                font-size: 0.875rem;
-            }
-
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.875rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .card h2 {
-                font-size: 1.5rem;
-            }
-
-            .form-control,
-            .form-select {
-                padding: 0.375rem;
-                font-size: 0.75rem;
-            }
-
-            .btn {
-                padding: 0.375rem 0.75rem;
-                font-size: 0.75rem;
-            }
-        }
+        
     </style>
 </head>
 
@@ -199,7 +166,7 @@
         </div>
         
     </div>
-
+<?php include('app/views/layout/footer.php'); ?>
     <script>
         document.getElementById('achat-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Empêche la soumission classique du formulaire

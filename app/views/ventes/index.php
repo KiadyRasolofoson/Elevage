@@ -185,7 +185,7 @@ $base_url = Flight::app()->get('flight.base_url');
             </div>
         </div>
     </div>
-    
+    <?php include('app/views/layout/footer.php'); ?>
     <script>
         $(document).ready(function() {
             $(".vendre-btn").click(function() {

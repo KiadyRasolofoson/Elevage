@@ -175,7 +175,7 @@ $base_url = Flight::app()->get('flight.base_url');
             </div>
         </div>
     </div>
-
+<?php include('app/views/layout/footer.php'); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

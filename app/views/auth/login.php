@@ -83,7 +83,7 @@ $base_url = Flight::app()->get('flight.base_url');
         </div>
       </div>
     </section>
-    
+    <?php include('app/views/layout/footer.php'); ?>
     <script src="<?= $base_url; ?>/public/assets2/header/script.js"></script>
 </body>
 

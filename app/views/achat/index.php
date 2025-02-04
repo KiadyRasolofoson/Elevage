@@ -48,6 +48,7 @@ $base_url = Flight::app()->get('flight.base_url');
             <p>Aucun achat disponible pour le moment.</p>
         <?php } ?>
     </div>
+    <?php include('app/views/layout/footer.php'); ?>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

@@ -109,17 +109,6 @@ $base_url = Flight::app()->get('flight.base_url');
             color: white;
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
 
         .box {
             border-radius: 6px;
@@ -191,11 +180,12 @@ $base_url = Flight::app()->get('flight.base_url');
 
 <body>
     <?php include('app/views/layout/header.php'); ?>
-    <div class="user-container">
+    <div class="container mt-4">
+        <div class="user-container">
         <div class="user-name"><?php echo $_SESSION['user']['nom']; ?></div>
     </div>
     <div class="container1">
-        <a class="box" href="<?php echo $base_url; ?>" style="pointer-events: none;">
+        <a class="box" href="<?php echo $base_url; ?>" style="">
             <h2>Capital</h2>
             <p>Voici votre balance actuel :
                 <?php if (isset($capital)) {
@@ -216,6 +206,9 @@ $base_url = Flight::app()->get('flight.base_url');
             <p>Regarder les status de votre compte.</p>
         </a>
     </div>
+    </div>
+    
+    <?php include('app/views/layout/footer.php'); ?>
 </body>
 
 </html>
