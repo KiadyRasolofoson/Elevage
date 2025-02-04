@@ -25,6 +25,7 @@ class Etat {
             return ['error' => 'Erreur de base de données: ' . $e->getMessage()];
         }
     }
+    
     public function addEtat($id_animaux, $poids)
     {
         try {

@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use app\models\Etat;
 
 use Flight;
@@ -15,16 +16,16 @@ class Animal
     }
 
     public function getAnimal() {}
-     public function getAnimalByNom($nom)
+    public function getAnimalByNom($nom)
     {
         $stmt = $this->db->prepare('SELECT * FROM animaux WHERE nom= :nom');
         $stmt->execute(['nom' => $nom]);
         $animal = $stmt->fetch(\PDO::FETCH_ASSOC);
-    
+
         if ($animal) {
             return $animal;
         }
-        return null;   
+        return 1;
     }
 
     public function estVendable($id_animal, $date)
@@ -45,13 +46,9 @@ class Animal
 
         $animal = $stmt->fetch();
 
-        // Vérifier si la requête a retourné des résultats
         if (!$animal) {
-            // Si aucun résultat n'est trouvé, retourner false
             return false;
         }
-
-        // Si l'animal existe, vérifier s'il est vendable
         return $animal['poids'] >= $animal['poids_minimal_vente'];
     }
 
@@ -60,10 +57,10 @@ class Animal
         $stmt = $this->db->query('SELECT * FROM animaux');
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function add($id_espece,$nom,$poids)
+    public function add($id_espece, $nom, $poids)
     {
         session_start();
-         try {
+        try {
             // Préparation de la requête SQL pour insérer un enregistrement dans la table nourrir_animaux
             $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom,id_user) 
                                         VALUES (:id_espece, :nom,:id_user)');
@@ -74,10 +71,12 @@ class Animal
                 'nom' => $nom,
                 'id_user' => $_SESSION['user']['id_user']
             ]);
-            $animal=$this->getAnimalByNom($nom);
-            $etat=new Etat(Flight::db());
+
+            $animal = $this->getAnimalByNom($nom);
+
+            $etat = new Etat(Flight::db());
             $etat->addEtat($animal['id'], $poids);
-         
+
             return true;
         } catch (\PDOException $e) {
             // En cas d'erreur, afficher l'erreur

@@ -5,6 +5,8 @@ namespace app\controllers;
 use app\models\ProductModel;
 use app\models\Vente;
 use Flight;
+use DateTime;
+use DateTimeZone;
 
 class VenteController
 {
@@ -23,7 +25,7 @@ class VenteController
     public function vendre($id_animaux)
     {
         $vente = new Vente(Flight::db());
-        $date_vente = date('Y-m-d'); 
+        $date_vente = (new DateTime('now', new DateTimeZone('Indian/Antananarivo')))->format('Y-m-d');
         $result = $vente->vendre($id_animaux, $date_vente);
         Flight::json(json_decode($result, true));
     }
