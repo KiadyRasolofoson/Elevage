@@ -2,7 +2,8 @@
 namespace app\controllers;
 use app\models\Animal;
 class DashboardController {
-    public static function index() {
+
+    public function index() {
         $date = Flight::request()->query->date ?? date('Y-m-d');
         
         $animal = new Animal(Flight::db());

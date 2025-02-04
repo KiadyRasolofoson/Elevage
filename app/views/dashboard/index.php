@@ -12,12 +12,12 @@ $base_url = Flight::app()->get('flight.base_url');
 </head>
 <body>
 <?php include('app/views/layout/header.php'); ?>
-?php $title = 'Tableau de Bord'; ?>
+<?php $title = 'Tableau de Bord'; ?>
 
 <div class="dashboard">
     <div class="dashboard-header">
         <h1>Tableau de Bord</h1>
-        <input type="date" value="<?= $date ?>" id="dateSelector" class="date-input">
+        <input type="date" value="<?= htmlspecialchars($date) ?>" id="dateSelector" class="date-input">
     </div>
 
     <div class="statistics-grid">
