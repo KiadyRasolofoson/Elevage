@@ -7,35 +7,37 @@ VALUES
     ('Charlie', 'charlie789');
 
 -- Insertion des espèces d'animaux
-INSERT INTO
-    espece (
-        nom,
-        poids_minimal_vente,
-        prix_kg,
-        poids_maximal,
-        jours_sans_manger,
-        perte_poids_par_jour
-    )
+INSERT INTO espece (
+    nom,
+    poids_minimal_vente,
+    prix_kg,
+    poids_maximal,
+    jours_sans_manger,
+    perte_poids_par_jour,
+    quota_nourriture_journalier
+)
 VALUES
-    ('Vache', 500.00, 2.50, 1000.00, 7, 1.50),
-    ('Mouton', 50.00, 5.00, 150.00, 5, 2.00),
-    ('Poulet', 2.00, 3.00, 5.00, 3, 3.00);
+    ('Vache', 500.00, 2.50, 1000.00, 7, 1.50, 10),
+    ('Mouton', 50.00, 5.00, 150.00, 5, 2.00, 5),
+    ('Poulet', 2.00, 3.00, 5.00, 3, 3.00, 2);
+
 
 -- Insertion des animaux
+-- Insertion des animaux avec images
 INSERT INTO
-    animaux (id_espece, id_user, nom)
+    animaux (id_espece, id_user, nom, photo, auto_vente)
 VALUES
-    (1, 1, 'Bella'),
-    (2, 2, 'Dolly'),
-    (3, 3, 'Coco');
+    (1, 1, 'Bella', 'public/upload/vache.jpeg',0),  -- Vache
+    (2, 1, 'Dolly', 'public/upload/mouton.jpeg',0), -- Mouton
+    (3, 1, 'Coco', 'public/upload/poulet.jpeg',0);  -- Poulet
 
 -- Insertion des états des animaux (au 4 février 2025)
 INSERT INTO
     etat (id_animaux, date_etat, poids)
 VALUES
-    (5, '2025-02-04', 600.00),
-    (2, '2025-02-04', 60.00),
-    (3, '2025-02-04', 3.00);
+    (7, '2025-02-04', 600.00),
+    (8, '2025-02-04', 60.00),
+    (9, '2025-02-04', 3.00);
 
 -- Insertion des aliments
 INSERT INTO
@@ -91,4 +93,3 @@ VALUES
     (3, 2000.00, '2025-02-04');
 
 
-    
