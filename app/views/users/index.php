@@ -54,11 +54,13 @@ $base_url = Flight::app()->get('flight.base_url');
             flex-direction: column;
             justify-content: center; /* Centre verticalement */
             align-items: center; /* Centre horizontalement */
+            transition: all 0.3s ease-in-out;
         }
 
         .box:hover {
             animation: float 1s infinite ease-in-out;
             border: 1px solid #3498db;
+            
         }
 
         .box:hover h2{
@@ -87,7 +89,7 @@ $base_url = Flight::app()->get('flight.base_url');
 
         .box h2 {
             color: white;
-            font-size: 3rem;
+            font-size: 1.5rem;
             margin-bottom: 20px; /* Espace entre le titre et la description */
         }
 
@@ -135,6 +137,34 @@ $base_url = Flight::app()->get('flight.base_url');
         .button-24:active {
         opacity: .5;
         }
+        .container1 {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    gap: 20px; /* Ajoute un espacement entre les boîtes */
+    width: 100%;
+    margin-top: 5%;
+    flex-wrap: wrap; /* Permet de s'adapter aux petits écrans */
+}
+
+.box {
+    width: 30%;
+    max-width: 350px; /* Empêche les boîtes de devenir trop larges */
+    min-height: 200px; /* Garde une hauteur minimale */
+    background-color: #3498db;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box h2, .box p {
+    text-align: center;
+}
+
     </style>
 </head>
 
@@ -152,9 +182,9 @@ $base_url = Flight::app()->get('flight.base_url');
             <h2>Mes Animaux</h2>
             <p>Regarder l'etat de vos animaux.</p>
         </a>
-        <a class="box" href="<?php echo $base_url;?>/vente?indice=3">
-            <h2>Mes Ventes</h2>
-            <p>Regarder les status de vos ventes.</p>
+        <a class="box" href="<?php echo $base_url;?>/dashboard?indice=4">
+            <h2>Voir Dashboard</h2>
+            <p>Regarder les status de votre compte.</p>
         </a>
     </div>
 </body>

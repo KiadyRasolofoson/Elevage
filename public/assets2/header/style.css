@@ -232,3 +232,21 @@ a {
   text-align: center;
   margin-top: 15px;
 }
+.welcome {
+  position: fixed;
+  background-color: transparent;
+  color: #FFF8E1;
+  padding: 40px 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+.welcome h1 {
+  font-size: 58px;
+  margin-bottom: 10px;
+  margin-top: 40%;
+}
+
+.welcome p {
+  font-size: 18px;
+}
