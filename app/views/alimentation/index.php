@@ -75,6 +75,10 @@ button:hover {
                 <label for="pourcentage_gain">Pourcentage de gain de poids (%):</label>
                 <input type="number" id="pourcentage_gain" name="pourcentage_gain" step="0.01" required>
             </div>
+            <div>
+                <label for="prix">Prix par kg :</label>
+                <input type="number" id="prix" name="prix" step="1" required>
+            </div>
             <button type="submit">Ajouter</button>
         </form>
 
@@ -86,6 +90,7 @@ button:hover {
                     <th>ID</th>
                     <th>Nom</th>
                     <th>Pourcentage de gain</th>
+                    <th>Prix par kg</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,6 +99,7 @@ button:hover {
                     <td><?php echo $alimentation['id']; ?></td>
                     <td><?php echo $alimentation['nom']; ?></td>
                     <td><?php echo $alimentation['pourcentage_gain']; ?>%</td>
+                    <td><?php echo $alimentation['prix']; ?>%</td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
