@@ -9,6 +9,7 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="<?= $base_url; ?>/public/assets/css/dash.css" />
 </head>
 <body>
 <?php include('app/views/layout/header.php'); ?>
@@ -17,6 +18,7 @@ $base_url = Flight::app()->get('flight.base_url');
 <div class="dashboard">
     <div class="dashboard-header">
         <h1>Tableau de Bord</h1>
+        
         <input type="date" value="<?= htmlspecialchars($date) ?>" id="dateSelector" class="date-input">
     </div>
 

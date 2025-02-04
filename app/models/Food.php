@@ -7,9 +7,11 @@ use Flight;
 class Food {
     private $db;
 
-    public function __construct() {
-        $this->db = Database::getInstance()->getConnection();
+    public function __construct($db)
+    {
+        $this->db = $db;
     }
+
 
     public function getAllFoods() {
         $stmt = $this->db->query('
@@ -36,6 +38,7 @@ class Food {
             SELECT 
                 a.id,
                 a.nom,
+                a.pourcentage_gain,
                 COALESCE(SUM(n.quantite), 0) as stock_total
             FROM alimentations a
             LEFT JOIN nourritures n ON a.id = n.alimentation_id

@@ -277,7 +277,38 @@ class Animal
         return $stmt->execute([$animalId, $date, $weight]);
     }
 
-   
+    public function getUnfedAnimals($date) {
+        $stmt = $this->db->prepare('
+            SELECT a.*, e.quota_nourriture_journalier, e.poids_minimal_vente,
+                   e.perte_poids_par_jour, et.poids, 
+                   DATEDIFF(?, COALESCE(
+                       (SELECT MAX(date_nourriture) 
+                        FROM nourrir_animaux 
+                        WHERE animal_id = a.id), 
+                       et.date_etat
+                   )) as days_without_food
+            FROM animaux a
+            JOIN espece e ON a.id_espece = e.id
+            JOIN etat et ON a.id = et.id_animaux
+            WHERE et.date_etat = (
+                SELECT MAX(date_etat) 
+                FROM etat 
+                WHERE id_animaux = a.id
+            )
+            AND NOT EXISTS (
+                SELECT 1 FROM mort 
+                WHERE id_animal = a.id
+            )
+            AND NOT EXISTS (
+                SELECT 1 FROM nourrir_animaux 
+                WHERE animal_id = a.id 
+                AND date_nourriture = ?
+            )
+            HAVING days_without_food > 0
+        ');
+        $stmt->execute([$date, $date]);
+        return $stmt->fetchAll();
+    }
     private function processUnfedAnimals($date) {
         $unfedAnimals = $this->getUnfedAnimals($date);
         foreach ($unfedAnimals as $animal) {

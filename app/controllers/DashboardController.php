@@ -1,7 +1,13 @@
 <?php
 namespace app\controllers;
+
 use app\models\Animal;
+
+use Flight;
+
 class DashboardController {
+
+    public function __construct__() {}
 
     public function index() {
         $date = Flight::request()->query->date ?? date('Y-m-d');

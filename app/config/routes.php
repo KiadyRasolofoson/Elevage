@@ -41,7 +41,6 @@ Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
 Flight::route('POST /register', [$user_controller, 'register']);
 Flight::route('GET /register', [$user_controller, 'registerForm']);
-Flight::route('GET /dashboard', [$user_controller, 'home']);
 FLight::route('GET /testHeader', [$Welcome_Controller, 'home']);
 FLight::route('GET /user', [$user_controller, 'goUser']);
 FLight::route('GET /animal', [$user_controller, 'goAnimal']);
