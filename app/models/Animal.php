@@ -62,15 +62,17 @@ class Animal
     }
     public function add($id_espece,$nom,$poids)
     {
+        session_start();
          try {
             // Préparation de la requête SQL pour insérer un enregistrement dans la table nourrir_animaux
-            $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom) 
-                                        VALUES (:id_espece, :nom)');
+            $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom,id_user) 
+                                        VALUES (:id_espece, :nom,:id_user)');
 
             // Exécution de la requête avec les paramètres fournis
             $stmt->execute([
                 'id_espece' => $id_espece,
-                'nom' => $nom
+                'nom' => $nom,
+                'id_user' => $_SESSION['user']['id_user']
             ]);
             $animal=$this->getAnimalByNom($nom);
             $etat=new Etat(Flight::db());
