@@ -99,5 +99,6 @@ $base_url = Flight::app()->get('flight.base_url');
         </div>
     </div>
     <?php include('app/views/layout/footer.php'); ?>
+    <script src="<?= $base_url; ?>/public/assets/js/app.js"></script>
 </body>
 </html>
