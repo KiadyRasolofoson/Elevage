@@ -1,6 +1,8 @@
-CREATE OR REPLACE VIEW animaux_avec_ventes AS
+CREATE
+OR REPLACE VIEW animaux_avec_ventes AS
 SELECT
     a.id AS animal_id,
+    a.photo AS image_url,
     a.id_user AS id_user,
     a.auto_vente AS auto_vente,
     a.nom AS animal_name,
@@ -9,10 +11,9 @@ SELECT
     et.poids AS poids_actuel -- Poids actuel de l'animal (dernier enregistrement)
 FROM
     animaux a
-JOIN
-    espece e ON a.id_espece = e.id
-LEFT JOIN
-    etat et ON et.id_animaux = a.id AND et.id_etat = (
+    JOIN espece e ON a.id_espece = e.id
+    LEFT JOIN etat et ON et.id_animaux = a.id
+    AND et.id_etat = (
         SELECT
             e2.id_etat
         FROM
@@ -22,14 +23,19 @@ LEFT JOIN
         ORDER BY
             e2.date_etat DESC,
             e2.id_etat DESC
-        LIMIT 1
+        LIMIT
+            1
     )
 WHERE
     a.id NOT IN (
-        SELECT animal_id
-        FROM ventes_animaux
+        SELECT
+            animal_id
+        FROM
+            ventes_animaux
     )
     AND a.id NOT IN (
-        SELECT id_animal
-        FROM mort
+        SELECT
+            id_animal
+        FROM
+            mort
     );

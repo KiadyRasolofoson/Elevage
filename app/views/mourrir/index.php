@@ -183,7 +183,7 @@ $base_url = Flight::app()->get('flight.base_url');
             <form id="animalForm" action="<?= $base_url ?>/ajouter-animal" method="POST">
 
                 <div class="mb-3">
-                    <label for="id_espece" class="form-label">Espèce</label>
+                    <label for="id_espece" class="form-label">Animal</label>
                     <select id="id_espece" name="animal_id" class="form-select" required>
                         <option value="">Sélectionner l'animal</option>
                         <?php foreach ($animaux as $animal) : ?>

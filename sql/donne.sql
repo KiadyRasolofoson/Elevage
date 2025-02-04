@@ -35,9 +35,9 @@ VALUES
 INSERT INTO
     etat (id_animaux, date_etat, poids)
 VALUES
-    (7, '2025-02-04', 600.00),
-    (8, '2025-02-04', 60.00),
-    (9, '2025-02-04', 3.00);
+    (1, '2025-02-04', 600.00),
+    (2, '2025-02-04', 60.00),
+    (3, '2025-02-04', 3.00);
 
 -- Insertion des aliments
 INSERT INTO
