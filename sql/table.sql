@@ -114,3 +114,11 @@ CREATE TABLE
     );
 
 ALTER TABLE capital CHANGE montant_initial solde DECIMAL(15, 2) NOT NULL;
+
+CREATE TABLE
+    mort (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        id_animal INT,
+        date_vente DATE NOT NULL,
+        FOREIGN KEY (id_animal) REFERENCES animaux (id)
+    );

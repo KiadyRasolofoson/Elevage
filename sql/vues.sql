@@ -2,6 +2,7 @@ CREATE OR REPLACE VIEW animaux_avec_ventes AS
 SELECT
     a.id AS animal_id,
     a.id_user AS id_user,
+    a.auto_vente AS auto_vente,
     a.nom AS animal_name,
     e.nom AS espece_name,
     e.poids_minimal_vente AS poids_minimal_vente, -- Poids minimal de vente de l'espèce
