@@ -162,8 +162,7 @@ $base_url = Flight::app()->get('flight.base_url');
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-primary">Gestion des Especes</h1>
             <div class="flex">
-                <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Retour</a>
-                <a href="<?= $base_url ?>/modifier" class="button" style="background-color:#6B8E23">Confirmer</a>
+                <a href="<?= $base_url ?>/animals" class="button" style="background-color: #B22222;">Retour</a>
             </div>
         </div>
 
@@ -230,11 +229,6 @@ $base_url = Flight::app()->get('flight.base_url');
                 this.appendChild(input);
                 input.focus();
 
-                // Sauvegarde la valeur lorsqu'on quitte le champ
-                input.addEventListener("blur", function () {
-                    saveCell(cell);
-                });
-
                 // Sauvegarde la valeur en appuyant sur "Entrée"
                 input.addEventListener("keypress", function (event) {
                     if (event.key === "Enter") {
@@ -264,6 +258,7 @@ $base_url = Flight::app()->get('flight.base_url');
                         console.log("Données mises à jour avec succès");
                     }
                 };
+                console.log(encodeURIComponent(newValue));
                 xhr.send("nom=" + encodeURIComponent(nom) + "&columnIndex=" + columnIndex + "&newValue=" + encodeURIComponent(newValue));
             }
         }
