@@ -37,6 +37,18 @@ class Animal
         return null;
     }
 
+    public function getAnimalById($id)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM animaux WHERE id = :id');
+        $stmt->execute(['id' => $id]);
+        $animal = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($animal) {
+            return $animal;
+        }
+        return null;
+    }
+
     public function estVendable($id_animal, $date)
     {
         // Récupérer le poids minimal requis pour la vente et le poids actuel de l'animal

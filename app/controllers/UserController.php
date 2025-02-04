@@ -121,7 +121,10 @@ class UserController
     }
     public function modification()
     {
-        $animals = new Animal(Flight::$db);
-        
+
+    }
+    public function goNourriture()
+    {
+        Flight::render('nourriture/index');
     }
 }
