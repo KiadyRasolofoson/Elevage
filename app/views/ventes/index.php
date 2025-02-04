@@ -95,6 +95,7 @@ $base_url = Flight::app()->get('flight.base_url');
         vertical-align: top;
         border-top: 1px solid #dee2e6;
         /* Centrer le contenu des cellules */
+         text-align: center;
     }
 
     .table td:nth-child(3),
@@ -134,50 +135,57 @@ $base_url = Flight::app()->get('flight.base_url');
 
 <body>
     <?php include('app/views/layout/header.php'); ?>
-    <div class="container">
-        <br>
-        <h1>Vendre</h1>
-        <br>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="text-primary">Liste des Ventes disponible</h1>
+            <div class="flex">
+                </div>
+        </div>
         <?php if (isset($listeAnimaux) && count($listeAnimaux) > 0) { ?>
-            <table class="table table-striped table-bordered">
-                <thead table-dark>
-                    <tr>
-                        <td>Id</td>
-                        <td>Nom</td>
-                        <td>Espèce</td>
-                        <td>Poids actuel</td>
-                        <td>Auto vente</td>
-                        <td>Date de vente</td>
-                        <td>Action</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($listeAnimaux as $animal) { ?>
-                        <tr id="row-<?php echo $animal['animal_id']; ?>">
-                            <td><?php echo htmlspecialchars($animal['animal_id']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['animal_name']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['poids_actuel']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
-                            <?php if ($animal['auto_vente'] == 0) { ?>
-                                <td>False</td>
-                            <?php } else { ?>
-                                <td>True</td>
-                            <?php
-                            } ?>
-                            <td>
-                                <input type="date" name="date">
-                            </td>
-                            <td>
-                                <button class="vendre-btn" data-id="<?php echo $animal['animal_id']; ?>">Vendre</button>
-                            </td>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Espèce</th>
+                            <th>Poids actuel</th>
+                            <th>Auto vente</th>
+                            <th>Date de vente</th>
+                            <th>Action</th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        <?php } else { ?>
-            <p>Aucun animal disponible à vendre.</p>
-        <?php } ?>
+                    </thead>
+                    <tbody class="">
+                        <?php foreach ($listeAnimaux as $animal) { ?>
+                            <tr id="row-<?php echo $animal['animal_id']; ?>">
+                                <td><?php echo htmlspecialchars($animal['animal_id']); ?></td>
+                                <td><?php echo htmlspecialchars($animal['animal_name']); ?></td>
+                                <td><?php echo htmlspecialchars($animal['poids_actuel']); ?></td>
+                                <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
+                                <?php if ($animal['auto_vente'] == 0) { ?>
+                                    <td>False</td>
+                                <?php } else { ?>
+                                    <td>True</td>
+                                <?php
+                                } ?>
+                                <td>
+                                    <input type="date" name="date">
+                                </td>
+                                <td>
+                                    <button class="vendre-btn button" data-id="<?php echo $animal['animal_id']; ?>" style="background-color:#6B8E23">Vendre</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+                <?php } else { ?>
+                    <p>Aucun animal disponible à vendre.</p>
+                <?php } ?>
+            </div>
+        </div>
     </div>
+    
     <script>
         $(document).ready(function() {
             $(".vendre-btn").click(function() {
