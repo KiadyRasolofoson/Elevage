@@ -8,8 +8,6 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuer un animal</title>
-    <!-- Inclure Bootstrap CSS pour le style -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,7 +20,7 @@ $base_url = Flight::app()->get('flight.base_url');
             <div class="mb-3">
                 <label for="animal_id" class="form-label">Sélectionner un animal</label>
                 <select class="form-select" id="animal_id" name="animal_id" required>
-                    <option value="">Choisir un animal</option>
+                    <option value="">Choisir  un animal</option>
                     <?php foreach ($animaux as $animal) : ?>
                         <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
                     <?php endforeach; ?>
@@ -41,7 +39,6 @@ $base_url = Flight::app()->get('flight.base_url');
     </div>
 
     <!-- Inclure Bootstrap JS pour les fonctionnalités supplémentaires -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         // Gérer la soumission du formulaire via AJAX
