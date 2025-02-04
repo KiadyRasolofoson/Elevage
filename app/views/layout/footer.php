@@ -2,6 +2,7 @@
     /* Footer */
    body {
     display: flex;
+    gap : 20px;
     flex-direction: column;
     min-height: 100vh; /* 100% de la hauteur de l'écran */
     margin: 0;
@@ -13,6 +14,7 @@ html, body {
 .container.mt-4 {
     flex: 1; /* Le contenu principal prend tout l'espace disponible */
     padding-bottom: 60px; /* Marge pour le footer */
+    width: 100%;
 }
 
 .site-footer {
