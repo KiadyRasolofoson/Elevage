@@ -181,27 +181,27 @@ $base_url = Flight::app()->get('flight.base_url');
         <div class="card shadow-lg p-4">
             <h2 class="text-center text-primary">Tuer un animal</h2>
             <form id="animalForm" action="<?= $base_url ?>/ajouter-animal" method="POST">
-                
+
                 <div class="mb-3">
                     <label for="id_espece" class="form-label">Espèce</label>
                     <select id="id_espece" name="animal_id" class="form-select" required>
                         <option value="">Sélectionner l'animal</option>
                         <?php foreach ($animaux as $animal) : ?>
-                        <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
-                    <?php endforeach; ?>
+                            <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
-                <label for="date_nourriture" class="form-label">Date</label>
-                <input type="date" class="form-control" id="date_nourriture" name="date" required>
-            </div>
+                    <label for="date_nourriture" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date_nourriture" name="date" required>
+                </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="button" style="background-color: #B22222;">Choissir</button>
                 </div>
             </form>
             <div id="message"></div>
         </div>
-    </div>  
+    </div>
 
     <!-- Inclure Bootstrap JS pour les fonctionnalités supplémentaires -->
 
@@ -218,16 +218,25 @@ $base_url = Flight::app()->get('flight.base_url');
                 data: formData, // Données du formulaire
                 success: function(response) {
                     // Traiter la réponse serveur
-                    var message = response.success ? "<div class='alert alert-success'>" + response.message + "</div>" : "<div class='alert alert-danger'>" + response.message + "</div>";
+                    var message = response.success ?
+                        "<p style='color: green;'>" + response.message + "</p>" // Message vert pour succès
+                        :
+                        "<p style='color: red;'>" + response.message + "</p>"; // Message rouge pour erreur
                     $('#message').html(message); // Afficher le message de succès ou d'erreur
+                    if (response.success) {
+                        setTimeout(function() {
+                            location.reload(); // Recharge la page
+                        }, 1000); // 1 seconde
+                    }
                 },
                 error: function() {
                     // Gérer les erreurs
-                    $('#message').html("<div class='alert alert-danger'>Une erreur s'est produite, veuillez réessayer.</div>");
+                    $('#message').html("<p style='color: red;'>Une erreur s'est produite, veuillez réessayer.</p>");
                 }
             });
         });
     </script>
+
 </body>
 
 </html>

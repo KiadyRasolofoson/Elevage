@@ -9,6 +9,7 @@ use app\models\Users;
 use app\models\Animal;
 use app\models\Mort;
 use app\models\Alimentation;
+use app\models\Capital;
 use app\models\Espece;
 use Flight;
 
@@ -19,6 +20,16 @@ class UserController
     public function loginForm()
     {
         Flight::render('auth/login');
+    }
+
+    public function logout()
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+            session_unset(); // Clear session variables
+        }
+
+        Flight::redirect('/'); // Redirect instead of render
     }
 
     public function home()
@@ -76,8 +87,31 @@ class UserController
 
     public function goUser()
     {
-        Flight::render('users/index');
+        session_start();
+        $id = $_SESSION['user']['id_user'];
+        $capital = new Capital(Flight::db());
+
+        // Fetch capital data (as a JSON string)
+        $data = $capital->getCapital($id);
+
+        // Decode the JSON string to an array
+        $dataArray = json_decode($data, true);  // The true flag makes it an associative array
+
+        // Check if the data is correctly decoded
+        if (is_array($dataArray) && isset($dataArray['somme_capital'])) {
+            $renderData = [
+                'capital' => $dataArray['somme_capital']
+            ];
+
+            // Render the page with the decoded data
+            Flight::render('users/index', $renderData);
+        } else {
+            // Handle the error if the format is not as expected
+            echo "Capital data is not in the expected format.";
+        }
     }
+
+
     public function goAnimal()
     {
         $animal = new Animal(Flight::db());
@@ -140,6 +174,6 @@ class UserController
         $data = [
             'animaux' => $mourir->getAnimalPasMort()
         ];
-        Flight::render('mourrir/index',$data);
+        Flight::render('mourrir/index', $data);
     }
 }
