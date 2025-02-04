@@ -15,7 +15,7 @@ $base_url = Flight::app()->get('flight.base_url');
     }
 
     h1.text-primary {
-        color: #007bff;
+        color: #B22222;
         font-size: 2.5rem;
         margin-bottom: 0;
     }
@@ -91,6 +91,10 @@ $base_url = Flight::app()->get('flight.base_url');
         padding: 0.75rem;
         vertical-align: top;
         border-top: 1px solid #dee2e6;
+         /* Centrer le contenu des cellules */
+    }
+    .table td:nth-child(3),td:nth-child(2) {
+        text-align: center;
     }
 
     .table thead th {
@@ -121,7 +125,6 @@ $base_url = Flight::app()->get('flight.base_url');
     .align-items-center {
         align-items: center !important;
     }
-
     
     </style>
 </head>
@@ -130,12 +133,12 @@ $base_url = Flight::app()->get('flight.base_url');
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-primary">Gestion des Animaux</h1>
-            <a href="<?= $base_url ?>/ajouter-animal" class="btn btn-success">Ajouter un Animal</a>
+            <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Ajouter un Animal</a>
         </div>
 
         <div class="card shadow-sm">
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped ">
                     <thead class="table-dark">
                         <tr>
                             <th>Nom</th>
@@ -143,7 +146,7 @@ $base_url = Flight::app()->get('flight.base_url');
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="">
                         <?php foreach ($animaux as $animal) : ?>
                             <tr>
                                 <td><?= htmlspecialchars($animal['nom']) ?></td>
