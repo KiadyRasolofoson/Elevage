@@ -5,6 +5,8 @@ namespace app\models;
 use app\models\Fonction;
 use Flight;
 use Exception;
+use DateTimeZone;
+use DateTime;
 
 class Vente
 {
@@ -32,10 +34,37 @@ class Vente
         // Appliquer un filtre supplémentaire sur les résultats
         $animaux_filtres = array_filter($animaux, function ($animal) use ($id_user) {
             // Filtrer les animaux pour ne retourner que ceux de l'utilisateur connecté
-            return $animal['id_user'] == $id_user && $animal['auto_vente'] == 0 ;
+            return $animal['id_user'] == $id_user && $animal['auto_vente'] == 0;
         });
         // Retourner les résultats filtrés
         return $animaux_filtres;
+    }
+
+    public function verifierAutovente()
+    {
+        // Sélectionner les animaux dont le champ auto_vente est vrai et qui ont atteint leur poids minimal
+        $stmt = $this->db->query('
+            SELECT * 
+            FROM animaux 
+            WHERE auto_vente = 1 
+            AND poids >= poids_minimal_vente 
+            AND id NOT IN (
+                SELECT id_animal
+                FROM ventes_animaux
+            )
+        ');
+
+        $animaux = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        // Utiliser la timezone correspondant à Madagascar (Africa/Nairobi)
+        $timezone = new DateTimeZone('Africa/Nairobi');
+        $date_vente = new DateTime('now', $timezone);  // Récupérer la date actuelle en utilisant la timezone de Madagascar
+        $date_vente = $date_vente->format('Y-m-d');    // Formater la date en 'YYYY-MM-DD'
+
+        foreach ($animaux as $animal) {
+            // Vendre automatiquement l'animal
+            $this->vendre($animal['id'], $date_vente);
+        }
     }
 
     public function vendre($id_animal, $date_ventes)
