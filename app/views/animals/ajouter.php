@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Animal</title>
+    <title>Acheter un Animal</title>
     <style>
         /* Reset CSS de base */
         * {
@@ -174,7 +174,7 @@
     <?php include('app/views/layout/header.php'); ?>
     <div class="container mt-4">
         <div class="card shadow-lg p-4">
-            <h2 class="text-center text-primary">Ajouter un Animal</h2>
+            <h2 class="text-center text-primary">Acheter animal</h2>
             <form action="<?= $base_url ?>/ajouter-animal" method="POST">
                 <div class="mb-3">
                     <label for="nom" class="form-label">Nom de l'Animal</label>

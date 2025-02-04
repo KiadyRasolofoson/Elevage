@@ -16,6 +16,15 @@ class Animal
     }
 
     public function getAnimal() {}
+
+    public function getIdDernierAnimal()
+    {
+        $stmt = $this->db->query('SELECT id FROM animaux ORDER BY id DESC LIMIT 1');
+        $dernierAnimal = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $dernierAnimal ? $dernierAnimal['id'] : null;
+    }
+
+
     public function getAnimalByNom($nom)
     {
         $stmt = $this->db->prepare('SELECT * FROM animaux WHERE nom= :nom');
@@ -25,7 +34,7 @@ class Animal
         if ($animal) {
             return $animal;
         }
-        return 1;
+        return null;
     }
 
     public function estVendable($id_animal, $date)
@@ -65,8 +74,6 @@ class Animal
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-
-
     public function add($id_espece, $nom, $poids)
     {
         session_start();
@@ -81,12 +88,12 @@ class Animal
                 'nom' => $nom,
                 'id_user' => $_SESSION['user']['id_user']
             ]);
-
-            $animal = $this->getAnimalByNom($nom);
-
             $etat = new Etat(Flight::db());
-            $etat->addEtat($animal['id'], $poids);
-
+            $etat->addEtat($this->getIdDernierAnimal(), $poids);
+            $espece = new Espece(Flight::db());
+            $prix = $espece->getPrixParKg($id_espece) * $poids;
+            $capital = new Capital(Flight::db());
+            $capital->modifierCapital($_SESSION['user']['id_user'], -$prix);
             return true;
         } catch (\PDOException $e) {
             // En cas d'erreur, afficher l'erreur

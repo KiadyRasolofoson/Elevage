@@ -133,7 +133,7 @@ $base_url = Flight::app()->get('flight.base_url');
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-primary">Gestion des Animaux</h1>
-            <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Ajouter un Animal</a>
+            <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Acheter un animal</a>
         </div>
 
         <div class="card shadow-sm">
