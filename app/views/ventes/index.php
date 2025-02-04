@@ -36,11 +36,7 @@ $base_url = Flight::app()->get('flight.base_url');
                             <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
                             <td><?php echo htmlspecialchars($animal['poids_actuel']) ? htmlspecialchars($animal['poids_actuel']) . ' kg' : 'Non disponible'; ?></td>
                             <td>
-                                <?php if ($animal['deja_dans_ventes'] != "Oui") { ?>
-                                    <button class="btn btn-primary vendre-btn" data-id="<?php echo $animal['animal_id']; ?>">Vendre</button>
-                                <?php } else { ?>
-                                    <span class="text-muted">Déjà en vente</span>
-                                <?php } ?>
+                                <button class="vendre-btn" data-id="<?php echo $animal['animal_id']; ?>">Vendre</button>
                             </td>
                         </tr>
                     <?php } ?>
@@ -61,7 +57,8 @@ $base_url = Flight::app()->get('flight.base_url');
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
-                            button.replaceWith('<span class="text-muted">Déjà en vente</span>'); // Remplacer le bouton par un texte
+                            button.replaceWith('<span class="text-muted">Vendu</span>'); // Remplacer le bouton par un texte
+                            alert(response.message + " , prix de vente = " + response.prix_vente);
                         } else {
                             alert(response.message);
                         }

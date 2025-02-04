@@ -45,7 +45,7 @@ class Vente
         if (!$animalModel->estVendable($id_animal, $date_ventes)) {
             return json_encode([
                 'success' => false,
-                'message' => "L'animal n'est pas vendable à cette date."
+                'message' => "L'animal n'est pas vendable."
             ]);
         }
         // Récupérer les informations nécessaires pour le prix de vente
@@ -73,6 +73,18 @@ class Vente
         // Calculer le prix de vente (poids * prix_kg)
         $prix_vente = $animal['poids'] * $animal['prix_kg'];
 
+        $query = "INSERT INTO capital (id_user, solde, date_creation) 
+          VALUES (:id_user, :prix_vente, :date_creation)";
+
+        session_start();
+        $id_user = $_SESSION['user']['id_user'];
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([
+            'id_user' => $id_user, // L'utilisateur qui vend l'animal
+            'prix_vente' => $prix_vente, // Montant de la vente
+            'date_creation' => $date_ventes
+        ]);
+
         // Insérer la vente dans la table ventes_animaux
         $query = "INSERT INTO ventes_animaux (animal_id, date_vente, prix_vente) 
               VALUES (:id_animal, :date_ventes, :prix_vente)";
@@ -86,6 +98,7 @@ class Vente
         return json_encode([
             'success' => true,
             'message' => "L'animal a été vendu avec succès.",
+            'prix_vente' => $prix_vente,
             'data' => [
                 'id_animal' => $id_animal,
                 'date_vente' => $date_ventes,
