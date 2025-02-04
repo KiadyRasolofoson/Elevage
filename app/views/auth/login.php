@@ -16,37 +16,64 @@ $base_url = Flight::app()->get('flight.base_url');
 </head>
 
 <body>
-    <div class="login">
-        <div class="row">
-            <div class="col-md-5">
-                <div class="logo-image"></div>
-            </div>
-            <div class="col-md-7">
-                <h2>We are happy to see you</h2>
-                <h4>Begin your day with us</h4>
-                <div class="sign-google">
-                </div>
-                <form action="<?= $base_url ?>/login" method="post">
+    <?php include('app/views/layout/header.php'); ?>
+    <section class="home show">
+      <div class="form_container">
+        <i class="uil uil-times form_close"></i>
+        <!-- Login From -->
+        <div class="form login_form">
+          <form action="<?= $base_url ?>/login" method="post">
+            <h2>Login</h2>
 
-                    <?php if (isset($data['error'])) {
-                        echo $data['error'];
-                    }
-                    ?>
-                    <div class="form-group">
-                        <label for="exampleInputEmail">Username</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Username" name="username">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-                    </div>
-                    <button type="submit" class="btn btn-default" id="submit-login">Login</button>
-                    <p id="no-account">Don't have account? <a href="<?= $base_url ?>/register">Sign up</a></p>
-                </form>
+            <div class="input_box">
+              <input type="username" placeholder="Enter your username" name="username" required />
+              <i class="uil uil-username username"></i>
             </div>
+            <div class="input_box">
+              <input type="password" placeholder="Enter your password" name="password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+
+            <button type="submit" class="button">Login Now</button>
+
+            <div class="login_signup">Don't have an account? <a href="#" id="signup">Signup</a></div>
+          </form>
         </div>
-    </div>
 
+        <!-- Signup From -->
+        <div class="form signup_form">
+          <form action="<?= $base_url ?>/register" method="POST">
+            <h2>Signup</h2>
+
+            <div class="input_box">
+              <input type="username" placeholder="Enter your username" name="username" required />
+              <i class="uil uil-username username"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Create password"  required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="input_box">
+              <input type="password" placeholder="Confirm password" name="password" required />
+              <i class="uil uil-lock password"></i>
+              <i class="uil uil-eye-slash pw_hide"></i>
+            </div>
+            <div class="input_box">
+              <input type="number" placeholder="Entrer votre Capital" name="balance" required />
+              <i class="uil uil-number number"></i>
+            </div>
+
+            <button class="button" type="submit">Signup Now</button>
+
+            <div class="login_signup">Already have an account? <a href="#" id="login">Login</a></div>
+          </form>
+        </div>
+      </div>
+    </section>
+    
+    <script src="<?= $base_url; ?>/public/assets2/header/script.js"></script>
 </body>
 
 </html>

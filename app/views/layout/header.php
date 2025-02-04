@@ -18,7 +18,7 @@ if (!empty($_GET['indice'])) {
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 
-<body>
+
 	<header class="header">
       <nav class="nav">
         <a href="#" class="nav_logo">StockFarm</a>
@@ -30,9 +30,9 @@ if (!empty($_GET['indice'])) {
 				for ($i = 0; $i < count($nav); $i++) {
 					if ($i == $indice) {
 			?>
-			<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link active" style="font-size:larger;color: #FFF8E1 !important;"><?php echo $nav[$i]; ?></a>
+			<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link active" style="font-size:larger;"><?php echo $nav[$i]; ?></a>
 			<?php } else { ?>
-				<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger; color: #FFF8E1 !important;"><?php echo $nav[$i]; ?></a>
+				<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger; " ><?php echo $nav[$i]; ?></a>
 			<?php } ?>
 			<?php } ?>
           </li>
@@ -47,5 +47,4 @@ if (!empty($_GET['indice'])) {
 	<script src="/Elevage/public/assets/css/header/js/popper.js"></script>
 	<script src="/Elevage/public/assets/css/header/js/bootstrap.min.js"></script>
 	<script src="/Elevage/public/assets/css/header/js/main.js"></script>
-	<script src="<?= $base_url; ?>/public/assets2/header/script.js"></script>
-</body>
+	
