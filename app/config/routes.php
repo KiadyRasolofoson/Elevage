@@ -60,6 +60,7 @@ FLight::route('GET /achat', [$user_controller, 'goAchat']);
 FLight::route('POST /achat/nourriture', [$achat_controller, 'goAchatNourriture']);
 
 FLight::route('POST /mourrir/tuer', [$mourir_controller, 'goMamono']);
+Flight::route('GET /ajout-alimentation',[$alimentation_controller, 'ajoutation']);
 
 // Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 

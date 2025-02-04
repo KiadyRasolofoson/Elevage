@@ -204,7 +204,7 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="button" style="background-color: #B22222;">Ajouter</button>
-                    <a href="<?= $base_url ?>/ajouter-animal" class="btn btn-secondary">Annuler</a>
+                    <a href="<?= $base_url ?>/animal" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
         </div>

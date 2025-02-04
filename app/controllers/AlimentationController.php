@@ -40,4 +40,7 @@ class AlimentationController
             Flight::json(['error' => $result], 500);
         }
     }
+    public function ajoutation(){
+        Flight::render('alimentation/ajout');
+    }
 }
