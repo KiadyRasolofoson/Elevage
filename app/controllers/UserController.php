@@ -119,4 +119,9 @@ class UserController
         $especes = $espece->getAllEspece();
         Flight::render('animals/ajouter', ['especes' => $especes]);
     }
+    public function modification()
+    {
+        $animals = new Animal(Flight::$db);
+        
+    }
 }
