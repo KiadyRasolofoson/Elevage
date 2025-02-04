@@ -37,7 +37,7 @@ class UserController
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['user'] = $userModel->getUserByUsername($username);
-            Flight::redirect('dashboard');
+            Flight::redirect('/user?indice=0');
         } else {
 
             // Afficher une erreur
@@ -87,7 +87,7 @@ class UserController
     {
         Flight::render('Dashboard/index');
     }
-    
+
     public function goVente()
     {
         $vente = new Vente(Flight::db());
