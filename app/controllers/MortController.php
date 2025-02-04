@@ -13,12 +13,15 @@ class MortController
 
     public function goMamono()
     {
+        // Récupérer les données envoyées via POST
         $id = $_POST['animal_id'];
         $date = $_POST['date'];
+
+        // Créer une instance du modèle Mort et appeler la méthode mamono
         $mort = new Mort(Flight::db());
         $result = $mort->mamono($id, $date);
-        Flight::json($result); // On suppose que $result est déjà un tableau ou objet
-    }
 
-    
+        // Retourner la réponse au format JSON
+        Flight::json($result);
+    }
 }
