@@ -121,7 +121,9 @@ class UserController
     }
     public function modification()
     {
-
+        $espece = new Espece(Flight::db());
+        $especes = $espece->getAllEspece();
+        Flight::render('animals/edit', ['especes' => $especes]);
     }
     public function goNourriture()
     {
