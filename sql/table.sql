@@ -21,6 +21,9 @@ CREATE TABLE
         perte_poids_par_jour DECIMAL(5, 2) NOT NULL -- % de perte de poids par jour sans manger
     );
 
+ALTER TABLE espece
+ADD COLUMN quota_nourriture_journalier DECIMAL(10, 2) NOT NULL;
+
 CREATE TABLE
     animaux (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -47,7 +50,9 @@ CREATE TABLE
         nom VARCHAR(100) NOT NULL,
         pourcentage_gain DECIMAL(5, 2) NOT NULL -- % de gain de poids par jour avec cet aliment
     );
-ALTER TABLE alimentations ADD COLUMN prix INT;
+
+ALTER TABLE alimentations
+ADD COLUMN prix INT;
 
 -- Table pour stocker les achats d'animaux
 CREATE TABLE

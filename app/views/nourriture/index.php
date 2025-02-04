@@ -193,7 +193,6 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">Acheter</button>
-                    <a href="<?= $base_url ?>/ajouter-animal" class="btn btn-secondary">Annuler</a>
                 </div>
             </form>
             <div id="message" class="mt-3 text-center"></div>
