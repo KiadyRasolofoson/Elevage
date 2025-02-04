@@ -9,9 +9,8 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-<body class="bg-gray-100 p-6">
+<body class="p-6">
 <?php include('app/views/layout/header.php'); ?>
     <div class="container mx-auto">
         <div class="flex flex-col md:flex-row justify-between items-center mb-6">
