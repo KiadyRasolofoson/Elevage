@@ -80,7 +80,7 @@ class Animal
 
         $stmt = $this->db->prepare('SELECT * FROM animaux 
                                 WHERE id NOT IN (SELECT animal_id FROM ventes_animaux) 
-                                AND id_user = :id_user');  // Correction ici
+                                AND id_user = :id_user' AND );  // Correction ici
 
         $stmt->execute(['id_user' => $user_id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
