@@ -8,10 +8,7 @@ use Flight;
 
 class AnimalController
 {
-    public function __construct()
-    {
-        
-    }
+    public function __construct() {}
 
     public function ajouter()
     {
@@ -21,7 +18,7 @@ class AnimalController
         $data = $request->data;
 
         // Vérification de la présence des paramètres nécessaires
-        if (!isset($data->id_espece,$data->nom,$data->poids,$data->autovente)) {
+        if (!isset($data->id_espece, $data->nom, $data->poids, $data->autovente, $_FILES['image'])) {
             Flight::json(['error' => 'Données incomplètes'], 400);
             return;
         }
@@ -31,16 +28,14 @@ class AnimalController
             $data->id_espece,
             $data->nom,
             $data->poids,
-            $data->autovente
+            $data->autovente,
+            $_FILES['image']
         );
 
         // Réponse JSON
         if ($result === true) {
-           
-        
             Flight::json(['success' => 'L\'alimentation a été inserer avec succès']);
             Flight::redirect('animal');
-            
         } else {
             Flight::json(['error' => $result], 500);
         }
