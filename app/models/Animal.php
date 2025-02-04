@@ -54,9 +54,19 @@ class Animal
 
     public function getAllAnimal()
     {
-        $stmt = $this->db->query('SELECT * FROM animaux');
+        session_start();
+        $user_id = $_SESSION['user']['id_user']; // Assurez-vous que c'est bien "id_user"
+
+        $stmt = $this->db->prepare('SELECT * FROM animaux 
+                                WHERE id NOT IN (SELECT animal_id FROM ventes_animaux) 
+                                AND id_user = :id_user');  // Correction ici
+
+        $stmt->execute(['id_user' => $user_id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+
+
     public function add($id_espece, $nom, $poids)
     {
         session_start();
