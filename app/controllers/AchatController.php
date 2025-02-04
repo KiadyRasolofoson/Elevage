@@ -18,4 +18,8 @@ class AchatController
         $result = $achatModel->achat($id_user, $id_animal);
         Flight::json(json_decode($result, true));
     }
+
+    public function acheterNouriture () {
+        
+    }
 }

@@ -125,6 +125,10 @@ class UserController
     }
     public function goNourriture()
     {
-        Flight::render('nourriture/index');
+        $alin = new Alimentation(Flight::db());
+        $data = [
+            'alimentations' => $alin->getAllAlimentation()
+        ];
+        Flight::render('nourriture/index',$data);
     }
 }

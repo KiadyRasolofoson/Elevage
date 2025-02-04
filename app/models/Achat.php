@@ -4,6 +4,7 @@ namespace app\models;
 
 use PDO;
 use Exception;
+use Flight;
 
 class Achat
 {
@@ -129,5 +130,53 @@ class Achat
             'id_acheteur' => $idAcheteur,
             'id_animal' => $id_animal_avendre
         ]);
+    }
+
+
+    public function achatNourriture($id_alim, $quantite)
+    {
+        $Alim = new Alimentation($this->db);
+
+        // Récupérer les informations de l'alimentation
+        $aliment = $Alim->getAlimentaionById($id_alim);
+
+        if (!$aliment) {
+            return json_encode(["success" => false, "message" => "Aliment non trouvé."]);
+        }
+
+        $prix_unitaire = $aliment['prix'];
+        $prix_total = $prix_unitaire * $quantite;
+
+        // Démarrer la session
+        session_start();
+
+        // Vérifier si l'utilisateur est bien connecté
+        if (!isset($_SESSION['user']['id_user'])) {
+            return json_encode(["success" => false, "message" => "Utilisateur non connecté."]);
+        }
+
+        $capital = new Capital(Flight::db());
+
+        // Vérifier si l'utilisateur a assez de capital
+        $solde_actuel = $capital->getCapital($_SESSION['user']['id_user']);
+        if ($solde_actuel < $prix_total) {
+            return json_encode(["success" => false, "message" => "Fonds insuffisants."]);
+        }
+        // Déduire du capital
+        $capital->modifierCapital($_SESSION['user']['id_user'], -$prix_total);
+
+        // Insérer l'achat dans la table nourritures
+        $stmt = $this->db->prepare("
+        INSERT INTO nourritures (alimentation_id, quantite, date_achat, prix_achat) 
+        VALUES (:alimentation_id, :quantite, NOW(), :prix_achat)
+    ");
+
+        $stmt->execute([
+            'alimentation_id' => $id_alim,
+            'quantite' => $quantite,
+            'prix_achat' => $prix_total
+        ]);
+
+        return json_encode(["success" => true, "message" => "Achat enregistré avec succès.", "prix_total" => $prix_total]);
     }
 }

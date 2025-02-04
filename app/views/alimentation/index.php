@@ -69,8 +69,8 @@ $base_url = Flight::app()->get('flight.base_url');
         <h1>Nourriture</h1>
 
         <!-- Formulaire d'ajout d'alimentation -->
-        <h2>Acheter un nourriture</h2>
-        <form action="<?php echo $base_url; ?>/achat/nourriture" method="POST">
+        <h2>Ajouter un nouvel aliment</h2>
+        <form action="<?php echo $base_url; ?>/alimentation" method="POST">
             <div>
                 <label for="nom">Aliment</label>
                 <input type="text" id="nom" name="nom" required>
@@ -79,8 +79,35 @@ $base_url = Flight::app()->get('flight.base_url');
                 <label for="pourcentage_gain">Quantiter en kg </label>
                 <input type="number" id="pourcentage_gain" name="pourcentage_gain" step="0.01" required>
             </div>
+            <div>
+                <label for="prix">Prix par kg :</label>
+                <input type="number" id="prix" name="prix" step="1" required>
+            </div>
             <button type="submit">Ajouter</button>
         </form>
+
+        <!-- Liste des aliments -->
+        <h2>Liste des aliments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Pourcentage de gain</th>
+                    <th>Prix par kg</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($alimentations as $alimentation): ?>
+                    <tr>
+                        <td><?php echo $alimentation['id']; ?></td>
+                        <td><?php echo $alimentation['nom']; ?></td>
+                        <td><?php echo $alimentation['pourcentage_gain']; ?>%</td>
+                        <td><?php echo $alimentation['prix']; ?>%</td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
     </div>
 </body>
 
