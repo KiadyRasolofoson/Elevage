@@ -12,6 +12,7 @@ use app\controllers\AlimentationController;
 use app\controllers\AnimalController;
 use app\controllers\EspeceController;
 use app\controllers\MortController;
+use app\controllers\DashboardController;
 
 //use Flight;
 
@@ -34,6 +35,7 @@ $animal_controller = new AnimalController();
 $achat_controller = new AchatController();
 $espece_controller = new EspeceController();
 $mourir_controller = new MortController();
+$dashboard_controller=new DashboardController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
@@ -46,7 +48,7 @@ FLight::route('GET /animal', [$user_controller, 'goAnimal']);
 FLight::route('GET /alimentation', [$user_controller, 'goAlimentation']);
 FLight::route('POST /alimentation', [$alimentation_controller, 'alimentation']);
 FLight::route('GET /vente', [$user_controller, 'goVente']);
-FLight::route('GET /dashboard', [$user_controller, 'goDashboard']);
+FLight::route('GET /dashboard', [$dashboard_controller, 'index']);
 FLight::route('GET /nourrir', [$user_controller, 'nourrir']);
 Flight::route('POST /nourrir', [$nourrir_controller, 'nourrir']);
 FLight::route('GET /ajouter-animal', [$user_controller, 'ajoutAnimal']);

@@ -10,94 +10,101 @@ $base_url = Flight::app()->get('flight.base_url');
     <title>Farm Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-6">
+<body>
 <?php include('app/views/layout/header.php'); ?>
-    <div class="container mx-auto">
-        <div class="flex flex-col md:flex-row justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold mb-4 md:mb-0">Farm Dashboard</h1>
-            <div class="flex items-center space-x-4">
-                <i class="fas fa-calendar-alt text-gray-500"></i>
-                <span class="text-gray-500">02/04/2025</span>
+?php $title = 'Tableau de Bord'; ?>
+
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>Tableau de Bord</h1>
+        <input type="date" value="<?= $date ?>" id="dateSelector" class="date-input">
+    </div>
+
+    <div class="statistics-grid">
+        <div class="stat-card">
+            <h3>Vue d'ensemble</h3>
+            <div class="stat-content">
+                <p>Animaux total: <?= $statistics['total_animals'] ?></p>
+                <h4>Par espèce:</h4>
+                <ul>
+                    <?php foreach ($statistics['animals_by_species'] as $species): ?>
+                        <li><?= $species['nom'] ?>: <?= $species['count'] ?></li>
+                    <?php endforeach; ?>
+                </ul>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6">
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold">Financial Status</h2>
-                    <i class="fas fa-chart-line text-green-500"></i>
-                </div>
-                <p class="text-2xl font-bold">€20.00</p>
-                <p class="text-sm text-gray-500">Current Capital</p>
-                <div class="flex justify-between mt-4">
-                    <p class="text-green-500">+€0.00</p>
-                    <p class="text-red-500">-€0.00</p>
-                </div>
-                <div class="flex justify-between text-sm text-gray-500">
-                    <p>Total Income</p>
-                    <p>Total Expenses</p>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold">Livestock Value</h2>
-                    <i class="fas fa-balance-scale text-blue-500"></i>
-                </div>
-                <p class="text-2xl font-bold">€4.00</p>
-                <p class="text-sm text-gray-500">Total Value</p>
-                <div class="flex justify-between mt-4">
-                    <p class="text-gray-500">1</p>
-                </div>
-                <div class="flex justify-between text-sm text-gray-500">
-                    <p>Total Animals</p>
-                </div>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-lg font-semibold">Food Inventory</h2>
-                    <i class="fas fa-box text-yellow-500"></i>
-                </div>
-                <p class="text-2xl font-bold">€4.00</p>
-                <p class="text-sm text-gray-500">Inventory Value</p>
-                <div class="flex justify-between mt-4">
-                    <p class="text-gray-500">1</p>
-                </div>
-                <div class="flex justify-between text-sm text-gray-500">
-                    <p>Total Types</p>
-                </div>
+
+        <div class="stat-card">
+            <h3>Ventes</h3>
+            <div class="stat-content">
+                <p>Ventes totales: <?= $statistics['sales_data']['total_sales'] ?></p>
+                <p>Revenu total: <?= number_format($statistics['sales_data']['total_revenue'], 2) ?> €</p>
+                <p>Prix moyen: <?= number_format($statistics['sales_data']['average_sale_price'], 2) ?> €</p>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-semibold mb-4">Animal Status</h2>
-                <p>chien</p>
-                <p class="text-gray-500">Weight: 4.0 kg</p>
-                <p class="text-gray-500">Value: €4.00</p>
-                <div class="flex space-x-2 mt-4">
-                    <span class="bg-green-100 text-green-700 text-xs font-semibold px-2.5 py-0.5 rounded">Healthy</span>
-                    <span class="bg-blue-100 text-blue-700 text-xs font-semibold px-2.5 py-0.5 rounded">Ready for Sale</span>
-                </div>
+
+        <div class="stat-card">
+            <h3>Consommation d'aliments</h3>
+            <div class="stat-content">
+                <?php foreach ($statistics['food_consumption'] as $food): ?>
+                    <div class="food-stat">
+                        <p><?= $food['nom'] ?>:</p>
+                        <p>Consommé: <?= $food['total_consumed'] ?> kg</p>
+                        <p>Animaux nourris: <?= $food['animals_fed'] ?></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow duration-300">
-                <h2 class="text-lg font-semibold mb-4">Status Summary</h2>
-                <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-4">
-                    <div class="bg-red-100 text-red-700 p-4 rounded-lg flex-1">
-                        <h3 class="font-semibold">Critical Status</h3>
-                        <p>Dead Animals: 0</p>
-                        <p>Starving: 0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Mortalité</h3>
+            <div class="stat-content">
+                <?php foreach ($statistics['deaths'] as $death): ?>
+                    <div class="death-stat">
+                        <p><?= $death['species'] ?>:</p>
+                        <p>Morts: <?= $death['death_count'] ?></p>
+                        <p>Durée de vie moyenne: <?= round($death['avg_lifespan']) ?> jours</p>
                     </div>
-                    <div class="bg-green-100 text-green-700 p-4 rounded-lg flex-1">
-                        <h3 class="font-semibold">Healthy Status</h3>
-                        <p>Healthy Animals: 1</p>
-                        <p>Ready for Sale: 1</p>
-                    </div>
-                </div>
-                <p class="text-gray-500">Food Inventory</p>
-                <p>vary</p>
-                <p class="text-gray-500 mt-4">Recent Transactions</p>
-                <p>2.0 kg</p>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <h3>Résultats Financiers</h3>
+            <div class="stat-content">
+                <p>Revenus: <?= number_format($statistics['profit_loss']['total_revenue'], 2) ?> €</p>
+                <p>Coûts: <?= number_format($statistics['profit_loss']['total_costs'], 2) ?> €</p>
+                <p class="<?= $statistics['profit_loss']['net_profit'] >= 0 ? 'profit' : 'loss' ?>">
+                    Bénéfice net: <?= number_format($statistics['profit_loss']['net_profit'], 2) ?> €
+                </p>
             </div>
         </div>
     </div>
+
+    <div class="animals-grid">
+        <?php foreach ($animals as $animal): ?>
+            <div class="animal-card">
+                <div class="animal-image">
+                    <img src="<?= $animal['photo'] ?? '/assets/images/default-animal.jpg' ?>" 
+                         alt="<?= htmlspecialchars($animal['nom']) ?>">
+                </div>
+                <div class="animal-info">
+                    <h3><?= htmlspecialchars($animal['nom']) ?></h3>
+                    <p class="animal-species"><?= htmlspecialchars($animal['espece_nom']) ?></p>
+                    <div class="animal-details">
+                        <p>Poids actuel: <?= $animal['poids'] ?? 'N/A' ?> kg</p>
+                        <p>Poids minimal de vente: <?= $animal['poids_minimal_vente'] ?> kg</p>
+                        <p>Vente auto: <?= $animal['auto_vente'] ? 'Oui' : 'Non' ?></p>
+                        <?php if ($animal['date_mort']): ?>
+                            <p class="animal-death">Mort le: <?= $animal['date_mort'] ?></p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
     <?php include('app/views/layout/footer.php'); ?>
+    <script src="<?= $base_url; ?>/public/assets/js/app.js"></script>
 </body>
 </html>
