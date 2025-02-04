@@ -149,28 +149,23 @@ $base_url = Flight::app()->get('flight.base_url');
                         <tr>
                             <th>Nom</th>
                             <th>Espèce</th>
+                            <th>Image</th> <!-- Nouvelle colonne pour l'image -->
                             <th>Auto-vente</th>
-                            <!-- <th>Actions</th> -->
                         </tr>
                     </thead>
-                    <tbody class="">
+                    <tbody>
                         <?php foreach ($animaux as $animal) : ?>
                             <tr>
                                 <td><?= htmlspecialchars($animal['nom']) ?></td>
                                 <td><?= htmlspecialchars($animal['id_espece']) ?></td>
-                                <?php if ($animal['auto_vente'] == 0) { ?>
-                                    <td>False</td>
-                                <?php } else { ?>
-                                    <td>True</td>
-                                <?php
-                                } ?>
-
-                                <!-- <td>
-                                    <a href="<?= $base_url ?>/nourrir?idAnimal=<?= $animal['id'] ?>&nomAnimal=<?= urlencode($animal['nom']) ?>" class="button" style="background-color:#6B8E23">Nourrir</a>
-                                </td> -->
+                                <td>
+                                    <img src="<?= htmlspecialchars($animal['photo']) ?>" alt="Image de <?= htmlspecialchars($animal['nom']) ?>" style="width: 100px; height: auto; border-radius: 8px;">
+                                </td>
+                                <td><?= $animal['auto_vente'] == 0 ? 'False' : 'True' ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
+
                 </table>
             </div>
         </div>
