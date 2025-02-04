@@ -133,4 +133,7 @@ class UserController
         ];
         Flight::render('nourriture/index',$data);
     }
+    public function mourrir(){
+        Flight::render('mourrir/index');
+    }
 }

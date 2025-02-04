@@ -53,6 +53,7 @@ FLight::route('POST /ajouter-animal', [$animal_controller, 'ajouter']);
 FLight::route('GET /modifier', [$user_controller, 'modification']);
 FLight::route('GET /nourriture', [$user_controller, 'goNourriture']);
 FLight::route('POST /update-espece', [$espece_controller, 'modifier']);
+FLight::route('GET /mourrir', [$user_controller, 'mourrir']);
 
 FLight::route('GET /achat', [$user_controller, 'goAchat']);
 FLight::route('POST /achat/nourriture', [$achat_controller, 'goAchatNourriture']);
