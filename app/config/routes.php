@@ -52,6 +52,7 @@ FLight::route('GET /modifier', [$user_controller, 'modification']);
 FLight::route('GET /nourriture', [$user_controller, 'goNourriture']);
 
 FLight::route('GET /achat', [$user_controller, 'goAchat']);
+FLight::route('POST /achat/nourriture', [$achat_controller, 'goAchatNourriture']);
 
 
 Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);

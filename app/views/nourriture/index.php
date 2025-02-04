@@ -189,7 +189,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="quantite" class="form-label">Quantité</label>
-                    <input type="number" id="quantite" name="quantite" class="form-control" required>
+                    <input type="number" id="quantite" name="quantiter" class="form-control" required>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-success">Acheter</button>
@@ -198,6 +198,7 @@
             </form>
             <div id="message" class="mt-3 text-center"></div>
         </div>
+        
     </div>
 
     <script>
@@ -206,7 +207,7 @@
 
             let formData = new FormData(this);
 
-            fetch('<?= $base_url ?>/achat-nourriture', {
+            fetch('<?= $base_url ?>/achat/nourriture', {
                     method: 'POST',
                     body: formData
                 })
@@ -214,9 +215,10 @@
                 .then(data => {
                     let messageDiv = document.getElementById('message');
                     if (data.success) {
-                        messageDiv.innerHTML = `<p style="color: green;">${data.message}</p>`;
+                        
+                        messageDiv.innerHTML = `<br><p style="color: green;">${data.message}</p>`;
                     } else {
-                        messageDiv.innerHTML = `<p style="color: red;">${data.message}</p>`;
+                        messageDiv.innerHTML = `<br><p style="color: red;">${data.message}</p>`;
                     }
                 })
                 .catch(error => {

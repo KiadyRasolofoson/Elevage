@@ -19,11 +19,10 @@ class AchatController
         Flight::json(json_decode($result, true));
     }
 
-    public function acheterNouriture()
+    public function goAchatNourriture()
     {
-        $id_alim = isset($_POST['id_alim']) ? intval($_POST['id_alim']) : null;
-        $quantite = isset($_POST['quantiter']) ? floatval($_POST['quantiter']) : null;
-
+        $id_alim = $_POST['id_alim'];
+        $quantite = $_POST['quantiter'];
         $achatModel = new Achat(Flight::db());
         $result  = $achatModel->achatNourriture($id_alim, $quantite);
         Flight::json(json_decode($result, true));
