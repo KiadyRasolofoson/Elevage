@@ -7,6 +7,7 @@ use app\models\ProductModel;
 use app\models\Vente;
 use app\models\Users;
 use app\models\Animal;
+use app\models\Mort;
 use app\models\Alimentation;
 use app\models\Espece;
 use Flight;
@@ -131,9 +132,14 @@ class UserController
         $data = [
             'alimentations' => $alin->getAllAlimentation()
         ];
-        Flight::render('nourriture/index',$data);
+        Flight::render('nourriture/index', $data);
     }
-    public function mourrir(){
-        Flight::render('mourrir/index');
+    public function mourrir()
+    {
+        $mourir = new Mort(Flight::db());
+        $data = [
+            'animaux' => $mourir->getAnimalPasMort()
+        ];
+        Flight::render('mourrir/index',$data);
     }
 }
