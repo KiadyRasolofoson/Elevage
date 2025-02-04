@@ -20,7 +20,7 @@ $base_url = Flight::app()->get('flight.base_url');
             <div class="mb-3">
                 <label for="animal_id" class="form-label">Sélectionner un animal</label>
                 <select class="form-select" id="animal_id" name="animal_id" required>
-                    <option value="">Choisir  un animal</option>
+                    <option value="">Choisir un animal</option>
                     <?php foreach ($animaux as $animal) : ?>
                         <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
                     <?php endforeach; ?>
