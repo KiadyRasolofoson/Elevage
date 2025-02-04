@@ -93,7 +93,7 @@ $base_url = Flight::app()->get('flight.base_url');
         border-top: 1px solid #dee2e6;
          /* Centrer le contenu des cellules */
     }
-    .table td:nth-child(3),td:nth-child(2) {
+    .table td:nth-child(3),td:nth-child(2),td:nth-child(4),td:nth-child(5),td:nth-child(6) {
         text-align: center;
     }
 
@@ -125,7 +125,35 @@ $base_url = Flight::app()->get('flight.base_url');
     .align-items-center {
         align-items: center !important;
     }
-    
+    .table td {
+        cursor: pointer; /* Curseur pour indiquer que c'est éditable */
+    }
+
+    .table td.editable {
+        background-color: #ffffcc; /* Jaune clair pour indiquer l'édition */
+        outline: 2px solid #ffa500; /* Contour orange pour visibilité */
+    }
+
+    .table td input {
+    width: 100%;
+    border: 2px solid transparent; /* Bordure rouge foncé */
+    border-radius: 5px; /* Bords arrondis */
+    padding: 5px; /* Espace interne */
+    background: transparent; /* Blanc cassé */
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    outline: none; /* Supprime le contour par défaut */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    transition: all 0.2s ease-in-out;
+}
+
+/* Effet au focus */
+.table td input:focus {
+    border-color: #ff8c00; /* Bordure orange foncé */
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.7); /* Lumière orange */
+    background: #fff; /* Fond blanc pur */
+}
     </style>
 </head>
 <body>
@@ -168,7 +196,56 @@ $base_url = Flight::app()->get('flight.base_url');
             </div>
         </div>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let tableCells = document.querySelectorAll(".table td");
 
+        tableCells.forEach(cell => {
+            cell.addEventListener("click", function () {
+                // Vérifie si une autre cellule est déjà en mode édition
+                let activeCell = document.querySelector(".editable");
+                if (activeCell && activeCell !== this) {
+                    saveCell(activeCell);
+                }
+
+                // Active l'édition pour la cellule cliquée
+                this.classList.add("editable");
+                let oldValue = this.innerText;
+                let input = document.createElement("input");
+                input.type = "text";
+                input.value = oldValue;
+                input.style.width = "100%";
+                input.style.border = "none";
+                input.style.background = "transparent";
+                input.style.textAlign = "center";
+                
+                this.innerHTML = "";
+                this.appendChild(input);
+                input.focus();
+
+                // Sauvegarde la valeur lorsqu'on quitte le champ
+                input.addEventListener("blur", function () {
+                    saveCell(cell);
+                });
+
+                // Sauvegarde la valeur en appuyant sur "Entrée"
+                input.addEventListener("keypress", function (event) {
+                    if (event.key === "Enter") {
+                        saveCell(cell);
+                    }
+                });
+            });
+        });
+
+        function saveCell(cell) {
+            let input = cell.querySelector("input");
+            if (input) {
+                cell.innerText = input.value; // Met à jour la valeur
+                cell.classList.remove("editable"); // Enlève le mode édition
+            }
+        }
+    });
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
