@@ -34,6 +34,9 @@ CREATE TABLE
         FOREIGN KEY (id_user) REFERENCES users (id_user)
     );
 
+ALTER TABLE animaux
+ADD COLUMN auto_vente INT NOT NULL;
+
 CREATE TABLE
     etat (
         id_etat INT AUTO_INCREMENT PRIMARY KEY,

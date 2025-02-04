@@ -146,7 +146,8 @@ $base_url = Flight::app()->get('flight.base_url');
                         <tr>
                             <th>Nom</th>
                             <th>Espèce</th>
-                            <th>Actions</th>
+                            <th>Auto-vente</th>
+                            <!-- <th>Actions</th> -->
                         </tr>
                     </thead>
                     <tbody class="">
@@ -154,10 +155,11 @@ $base_url = Flight::app()->get('flight.base_url');
                             <tr>
                                 <td><?= htmlspecialchars($animal['nom']) ?></td>
                                 <td><?= htmlspecialchars($animal['id_espece']) ?></td>
-                                <td>
+                                if
+                                <td><?= htmlspecialchars($animal['auto_vente']) ?></td>
+                                <!-- <td>
                                     <a href="<?= $base_url ?>/nourrir?idAnimal=<?= $animal['id'] ?>&nomAnimal=<?= urlencode($animal['nom']) ?>" class="button" style="background-color:#6B8E23">Nourrir</a>
-                                    
-                                </td>
+                                </td> -->
                             </tr>
                         <?php endforeach; ?>
                     </tbody>

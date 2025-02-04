@@ -21,7 +21,7 @@ class AnimalController
         $data = $request->data;
 
         // Vérification de la présence des paramètres nécessaires
-        if (!isset($data->id_espece,$data->nom,$data->poids)) {
+        if (!isset($data->id_espece,$data->nom,$data->poids,$data->autovente)) {
             Flight::json(['error' => 'Données incomplètes'], 400);
             return;
         }
@@ -30,7 +30,8 @@ class AnimalController
         $result = $animal->add(
             $data->id_espece,
             $data->nom,
-            $data->poids
+            $data->poids,
+            $data->autovente
         );
 
         // Réponse JSON
