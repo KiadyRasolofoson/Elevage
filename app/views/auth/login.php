@@ -12,12 +12,23 @@ $base_url = Flight::app()->get('flight.base_url');
     <link rel="stylesheet" href="<?= $base_url ?>/public/assets2/css/style.css">
     <script src="<?= $base_url ?>/public/assets2/js/jquery.min.js"></script>
     <script src="<?= $base_url ?>/public/assets2/js/bootstrap.min.js"></script>
-    <title>Noel</title>
+    <title>Login</title>
 </head>
 
 <body>
-    <?php include('app/views/layout/header.php'); ?>
-    <section class="home show">
+    <?php
+    $_GET['indice']=100;
+    include('app/views/layout/header.php');
+    ?>
+    <section class="welcome">
+    <div class="container text-center">
+        <h1>Bienvenue sur <b>StockFarm</b></h1>
+        <p>Pour accéder à toutes les fonctionnalités, veuillez vous connecter ou créer un compte.</p>
+        
+    </div>
+</section>
+
+    <section class="home">
       <div class="form_container">
         <i class="uil uil-times form_close"></i>
         <!-- Login From -->

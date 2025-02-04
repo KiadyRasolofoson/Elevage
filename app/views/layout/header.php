@@ -25,7 +25,7 @@ if (!empty($_GET['indice'])) {
 
         <ul class="nav_items">
           <li class="nav_item">
-
+			<?php if ($indice < 100) { ?>
 			<?php
 				for ($i = 0; $i < count($nav); $i++) {
 					if ($i == $indice) {
@@ -35,6 +35,12 @@ if (!empty($_GET['indice'])) {
 				<a href="<?php echo $base_url . $nav_link[$i] . '?indice=' . $i; ?>" class="nav-link" style="font-size:larger; " ><?php echo $nav[$i]; ?></a>
 			<?php } ?>
 			<?php } ?>
+			<?php }else { ?>
+				<?php for ($i = 0; $i < count($nav); $i++) { ?>
+				<a href="#" class="nav-link" style="font-size:larger; " disable><?php echo $nav[$i]; ?></a>
+			
+				<?php } ?>	
+			<?php } ?>	
           </li>
         </ul>
 
