@@ -93,7 +93,7 @@ $base_url = Flight::app()->get('flight.base_url');
         border-top: 1px solid #dee2e6;
          /* Centrer le contenu des cellules */
     }
-    .table td:nth-child(3),td:nth-child(2),td:nth-child(4),td:nth-child(5),td:nth-child(6) {
+    .table td:nth-child(3),td:nth-child(2),td:nth-child(4),td:nth-child(5),td:nth-child(6),td:nth-child(7) {
         text-align: center;
     }
 
@@ -177,18 +177,20 @@ $base_url = Flight::app()->get('flight.base_url');
                             <th>Poids maximal</th>
                             <th>Jours sans manger</th>
                             <th>Perte poids par jour</th>
-                            <th>Prix (/kg)</th>
+                            <th>Prix (Ar/kg)</th>
+                            <th>Quota ration Journalier</th>
                         </tr>
                     </thead>
                     <tbody class="">
                         <?php foreach ($especes as $espece) : ?>
                             <tr>
-                                <td><?= htmlspecialchars($espece['nom']) ?></td>
+                                <td class="nom"><?= htmlspecialchars($espece['nom']) ?></td>
                                 <td><?= htmlspecialchars($espece['poids_minimal_vente']) ?></td>
                                 <td><?= htmlspecialchars($espece['poids_maximal']) ?></td>
                                 <td><?= htmlspecialchars($espece['jours_sans_manger']) ?></td>
                                 <td><?= htmlspecialchars($espece['perte_poids_par_jour']) ?></td>
-                                <td><?= htmlspecialchars($espece['prix_kg']) ?> Ar</td>
+                                <td><?= htmlspecialchars($espece['prix_kg']) ?> </td>
+                                <td><?= htmlspecialchars($espece['quota_nourriture_journalier']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -212,7 +214,12 @@ $base_url = Flight::app()->get('flight.base_url');
                 this.classList.add("editable");
                 let oldValue = this.innerText;
                 let input = document.createElement("input");
-                input.type = "text";
+                if (this.classList.contains("nom")){
+                     input.type = "text";
+                }else{
+                     input.type = "number";
+                }
+               
                 input.value = oldValue;
                 input.style.width = "100%";
                 input.style.border = "none";
@@ -240,8 +247,24 @@ $base_url = Flight::app()->get('flight.base_url');
         function saveCell(cell) {
             let input = cell.querySelector("input");
             if (input) {
-                cell.innerText = input.value; // Met à jour la valeur
-                cell.classList.remove("editable"); // Enlève le mode édition
+                let newValue = input.value;
+                cell.innerText = newValue; 
+                cell.classList.remove("editable"); 
+
+               
+                let row = cell.parentElement;
+                let nom = row.querySelector(".nom").innerText; 
+                let columnIndex = cell.cellIndex; 
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "<?= $base_url ?>/update-espece", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        console.log("Données mises à jour avec succès");
+                    }
+                };
+                xhr.send("nom=" + encodeURIComponent(nom) + "&columnIndex=" + columnIndex + "&newValue=" + encodeURIComponent(newValue));
             }
         }
     });
