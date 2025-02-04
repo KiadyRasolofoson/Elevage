@@ -19,6 +19,7 @@ class UserController
     {
         Flight::render('auth/login');
     }
+
     public function home()
     {
         Flight::render('dashboard/index');
