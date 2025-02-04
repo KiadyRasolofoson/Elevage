@@ -43,8 +43,9 @@ if (!empty($_GET['indice'])) {
 			<?php } ?>	
           </li>
         </ul>
-
+		<?php if ($indice == 100) { ?>
         <button class="button" id="form-open">Login</button>
+		<?php } ?>
       </nav>
     </header>
 
