@@ -146,6 +146,8 @@ $base_url = Flight::app()->get('flight.base_url');
     outline: none; /* Supprime le contour par défaut */
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère */
     transition: all 0.2s ease-in-out;
+    border: 2px solid #B22222; /* Rouge caractéristique */
+  background-color: #fffaf0; 
 }
 
 /* Effet au focus */
@@ -153,6 +155,39 @@ $base_url = Flight::app()->get('flight.base_url');
     border-color: #ff8c00; /* Bordure orange foncé */
     box-shadow: 0 0 8px rgba(255, 140, 0, 0.7); /* Lumière orange */
     background: #fff; /* Fond blanc pur */
+}
+/* Icône crayon au survol */
+.table tbody td {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.table tbody td:hover::after {
+  content: '✎';
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #B22222;
+  font-size: 16px;
+  pointer-events: none;
+}
+
+/* Message d'instruction */
+.edit-instruction {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+  border: 1px solid #dee2e6;
+}
+
+.table td input:focus {
+  border-color: #ff8c00; /* Orange foncé */
+  box-shadow: 0 0 8px rgba(178, 34, 34, 0.3); /* Ombre rouge */
 }
     </style>
 </head>
@@ -193,8 +228,13 @@ $base_url = Flight::app()->get('flight.base_url');
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
-                </table>
+                        </table>
             </div>
+            </div>
+<div class="edit-instruction">
+  Cliquez sur les éléments pour les modifier et appuyez sur Entrée pour confirmer
+</div>
+</div>
         </div>
     </div>
     <script>
@@ -228,8 +268,6 @@ $base_url = Flight::app()->get('flight.base_url');
                 this.innerHTML = "";
                 this.appendChild(input);
                 input.focus();
-
-                // Sauvegarde la valeur en appuyant sur "Entrée"
                 input.addEventListener("keypress", function (event) {
                     if (event.key === "Enter") {
                         saveCell(cell);
