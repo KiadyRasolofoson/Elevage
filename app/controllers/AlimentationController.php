@@ -8,10 +8,7 @@ use Flight;
 
 class AlimentationController
 {
-    public function __construct()
-    {
-        
-    }
+    public function __construct() {}
 
     public function alimentation()
     {
@@ -21,7 +18,7 @@ class AlimentationController
         $data = $request->data;
 
         // Vérification de la présence des paramètres nécessaires
-        if (!isset($data->pourcentage_gain,$data->nom)) {
+        if (!isset($data->pourcentage_gain, $data->nom)) {
             Flight::json(['error' => 'Données incomplètes'], 400);
             return;
         }
@@ -29,13 +26,14 @@ class AlimentationController
         // Appel à la méthode ajout du modèle
         $result = $alimentation->add(
             $data->pourcentage_gain,
-            $data->nom
+            $data->nom,
+            $data->prix
         );
 
         // Réponse JSON
         if ($result === true) {
-           
-        
+
+
             Flight::json(['success' => 'L\'alimentation a été inserer avec succès']);
             Flight::redirect('alimentation');
         } else {

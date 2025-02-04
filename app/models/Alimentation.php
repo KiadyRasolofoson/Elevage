@@ -27,17 +27,18 @@ class Alimentation {
         $stmt = $this->db->query('SELECT * FROM alimentations');
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-    public function add($pourcentage_gain,$nom)
+    public function add($pourcentage_gain,$nom,$prix)
     {
          try {
             // Préparation de la requête SQL pour insérer un enregistrement dans la table nourrir_animaux
-            $stmt = $this->db->prepare('INSERT INTO alimentations (nom, pourcentage_gain) 
-                                        VALUES (:nom, :pourcentage_gain)');
+            $stmt = $this->db->prepare('INSERT INTO alimentations (nom, pourcentage_gain,prix) 
+                                        VALUES (:nom, :pourcentage_gain, :prix)');
 
             // Exécution de la requête avec les paramètres fournis
             $stmt->execute([
                 'nom' => $nom,
-                'pourcentage_gain' => $pourcentage_gain
+                'pourcentage_gain' => $pourcentage_gain,
+                'prix' => $prix
             ]);
          
             return true;

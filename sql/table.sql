@@ -47,6 +47,7 @@ CREATE TABLE
         nom VARCHAR(100) NOT NULL,
         pourcentage_gain DECIMAL(5, 2) NOT NULL -- % de gain de poids par jour avec cet aliment
     );
+ALTER TABLE alimentations ADD COLUMN prix INT;
 
 -- Table pour stocker les achats d'animaux
 CREATE TABLE
