@@ -15,13 +15,13 @@ $base_url = Flight::app()->get('flight.base_url');
 <?php include('app/views/layout/header.php'); ?>
 <?php $title = 'Tableau de Bord'; ?>
 
-<div class="dashboard">
+<div class="container">
     <div class="dashboard-header">
         <h1>Tableau de Bord</h1>
-        
-        <input type="date" value="<?= htmlspecialchars($date) ?>" id="dateSelector" class="date-input">
+        <input type="date" value="<?= $date ?>" id="dateSelector" class="date-input">
+        <br><br><br>
     </div>
-
+    <br><br>
     <div class="statistics-grid">
         <div class="stat-card">
             <h3>Vue d'ensemble</h3>
@@ -40,8 +40,8 @@ $base_url = Flight::app()->get('flight.base_url');
             <h3>Ventes</h3>
             <div class="stat-content">
                 <p>Ventes totales: <?= $statistics['sales_data']['total_sales'] ?></p>
-                <p>Revenu total: <?= number_format($statistics['sales_data']['total_revenue'], 2) ?> €</p>
-                <p>Prix moyen: <?= number_format($statistics['sales_data']['average_sale_price'], 2) ?> €</p>
+                <p>Revenu total: <?= isset($statistics['sales_data']['total_revenue']) ? number_format($statistics['sales_data']['total_revenue'], 2) : 'N/A' ?> €</p>
+                <p>Prix moyen: <?= isset($statistics['sales_data']['average_sale_price']) ? number_format($statistics['sales_data']['average_sale_price'], 2) : 'N/A' ?> €</p>
             </div>
         </div>
 
@@ -107,6 +107,63 @@ $base_url = Flight::app()->get('flight.base_url');
     </div>
 </div>
     <?php include('app/views/layout/footer.php'); ?>
-    <script src="<?= $base_url; ?>/public/assets/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // Date selector handling
+    const dateSelector = document.getElementById('dateSelector');
+    if (dateSelector) {
+        dateSelector.addEventListener('change', function(e) {
+            fetch(`/?date=${e.target.value}`)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newContent = document.querySelector('.animals-grid');
+                    document.querySelector('.animals-grid').innerHTML = newContent.innerHTML;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    }
+
+    // Capital modal handling
+    const updateCapitalBtn = document.getElementById('updateCapital');
+    const capitalModal = document.getElementById('capitalModal');
+    const capitalForm = document.getElementById('capitalForm');
+
+    if (updateCapitalBtn && capitalModal) {
+        updateCapitalBtn.addEventListener('click', function() {
+            capitalModal.style.display = 'flex';
+        });
+
+        capitalModal.addEventListener('click', function(e) {
+            if (e.target === capitalModal) {
+                capitalModal.style.display = 'none';
+            }
+        });
+
+        if (capitalForm) {
+            capitalForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = document.getElementById('amount').value;
+
+                fetch('/transactions/update-capital', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ amount }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        }
+    }
+});
+    </script>
 </body>
 </html>

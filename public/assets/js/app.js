@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(html => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
-                    const newContent = doc.querySelector('.animals-grid');
+                    const newContent = document.querySelector('.animals-grid');
                     document.querySelector('.animals-grid').innerHTML = newContent.innerHTML;
                 })
                 .catch(error => console.error('Error:', error));
