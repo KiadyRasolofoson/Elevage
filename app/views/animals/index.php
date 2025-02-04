@@ -133,7 +133,10 @@ $base_url = Flight::app()->get('flight.base_url');
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="text-primary">Gestion des Animaux</h1>
-            <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Acheter un animal</a>
+            <div class="flex">
+                <a href="<?= $base_url ?>/ajouter-animal" class="button" style="background-color: #B22222;">Acheter un animal</a>
+                <a href="<?= $base_url ?>/modifier" class="button" style="background-color:#6B8E23">Modifier èspece</a>
+            </div>
         </div>
 
         <div class="card shadow-sm">
@@ -153,7 +156,7 @@ $base_url = Flight::app()->get('flight.base_url');
                                 <td><?= htmlspecialchars($animal['id_espece']) ?></td>
                                 <td>
                                     <a href="<?= $base_url ?>/nourrir?idAnimal=<?= $animal['id'] ?>&nomAnimal=<?= urlencode($animal['nom']) ?>" class="button" style="background-color:#6B8E23">Nourrir</a>
-                                    <a href="<?= $base_url ?>/modifier?idAnimal=<?= $animal['id'] ?>&nomAnimal=<?= urlencode($animal['nom']) ?>" class="button" style="background-color:#B22222">Modifier</a>
+                                    
                                 </td>
                             </tr>
                         <?php endforeach; ?>
