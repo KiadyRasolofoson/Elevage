@@ -32,7 +32,7 @@ class Vente
         // Appliquer un filtre supplémentaire sur les résultats
         $animaux_filtres = array_filter($animaux, function ($animal) use ($id_user) {
             // Filtrer les animaux pour ne retourner que ceux de l'utilisateur connecté
-            return $animal['id_user'] == $id_user && $animal['auto_vente'] == 0;
+            return $animal['id_user'] == $id_user && $animal['auto_vente'] == 0 ;
         });
         // Retourner les résultats filtrés
         return $animaux_filtres;
