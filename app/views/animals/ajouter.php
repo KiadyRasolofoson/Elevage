@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -170,6 +171,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php include('app/views/layout/header.php'); ?>
     <div class="container mt-4">
@@ -190,8 +192,15 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="poids" class="form-label">Poids initial</label>
+                    <label for="poids" class="form-label">Poids</label>
                     <input type="number" id="poids" name="poids" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="id_espece" class="form-label">Autovente</label>
+                    <select id="id_espece" name="autovente" class="form-select" required>
+                        <option value="0">False</option>
+                        <option value="1">True</option>
+                    </select>
                 </div>
                 <div class="d-grid gap-2">
                     <button type="submit" class="button" style="background-color: #B22222;">Ajouter</button>
@@ -200,7 +209,7 @@
             </form>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

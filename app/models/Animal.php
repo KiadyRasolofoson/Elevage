@@ -86,19 +86,20 @@ class Animal
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function add($id_espece, $nom, $poids)
+    public function add($id_espece, $nom, $poids, $autovente)
     {
         session_start();
         try {
             // Préparation de la requête SQL pour insérer un enregistrement dans la table nourrir_animaux
-            $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom,id_user) 
-                                        VALUES (:id_espece, :nom,:id_user)');
+            $stmt = $this->db->prepare('INSERT INTO animaux (id_espece, nom,id_user, auto_vente) 
+                                        VALUES (:id_espece, :nom,:id_user , :autovente)');
 
             // Exécution de la requête avec les paramètres fournis
             $stmt->execute([
                 'id_espece' => $id_espece,
                 'nom' => $nom,
-                'id_user' => $_SESSION['user']['id_user']
+                'id_user' => $_SESSION['user']['id_user'],
+                'autovente' => $autovente
             ]);
             $etat = new Etat(Flight::db());
             $etat->addEtat($this->getIdDernierAnimal(), $poids);
