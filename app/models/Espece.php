@@ -13,7 +13,6 @@ class Espece
         $this->db = $db;
     }
 
-
     public function getAllEspece()
     {
         $stmt = $this->db->query('SELECT * FROM espece');
