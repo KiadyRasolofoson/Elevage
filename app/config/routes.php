@@ -54,12 +54,24 @@ FLight::route('GET /nourriture', [$user_controller, 'goNourriture']);
 FLight::route('GET /achat', [$user_controller, 'goAchat']);
 FLight::route('POST /achat/nourriture', [$achat_controller, 'goAchatNourriture']);
 
-
-Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
+// Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 
 Flight::route('POST /achat/acheter/@id', [$achat_controller, 'achat']);
-//$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
+Flight::route('POST /vente/vendre/@id', function($id) use ($Vente_controller) {
+    // Récupération de la date envoyée via AJAX
+    $date_vente = Flight::request()->data->date_vente;
 
+    // Vérification si la date est vide
+    if (empty($date_vente)) {
+        Flight::json(["success" => false, "message" => "Veuillez fournir une date de vente."]);
+        return;
+    }
+
+    // Appel de la méthode vendre du contrôleur avec l'ID et la date
+    $Vente_controller->vendre($id, $date_vente);
+});
+
+//$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 $router->group('/api', function () use ($router, $app) {
 	$Api_Example_Controller = new ApiExampleController($app);

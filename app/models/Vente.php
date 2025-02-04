@@ -32,7 +32,7 @@ class Vente
         // Appliquer un filtre supplémentaire sur les résultats
         $animaux_filtres = array_filter($animaux, function ($animal) use ($id_user) {
             // Filtrer les animaux pour ne retourner que ceux de l'utilisateur connecté
-            return $animal['id_user'] == $id_user;
+            return $animal['id_user'] == $id_user && $animal['auto_vente'] == 0;
         });
         // Retourner les résultats filtrés
         return $animaux_filtres;
@@ -41,13 +41,13 @@ class Vente
     public function vendre($id_animal, $date_ventes)
     {
         // Vérifier si l'animal est vendable
-        $animalModel = new Animal($this->db);
-        if (!$animalModel->estVendable($id_animal, $date_ventes)) {
-            return json_encode([
-                'success' => false,
-                'message' => "L'animal n'est pas vendable."
-            ]);
-        }
+        // $animalModel = new Animal($this->db);
+        // if (!$animalModel->estVendable($id_animal, $date_ventes)) {
+        //     return json_encode([
+        //         'success' => false,
+        //         'message' => "L'animal n'est pas vendable cause poids insuffisant"
+        //     ]);
+        // }
         // Récupérer les informations nécessaires pour le prix de vente
         // Sélectionner le dernier état de l'animal
         $query = "SELECT e.prix_kg, et.poids 

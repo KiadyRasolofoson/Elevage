@@ -145,9 +145,9 @@ $base_url = Flight::app()->get('flight.base_url');
                         <td>Id</td>
                         <td>Nom</td>
                         <td>Espèce</td>
-                        <td>Poids Minimal</td>
-                        <td>Poids Actuel</td>
-                        <td>Date</td>
+                        <td>Poids actuel</td>
+                        <td>Auto vente</td>
+                        <td>Date de vente</td>
                         <td>Action</td>
                     </tr>
                 </thead>
@@ -156,9 +156,14 @@ $base_url = Flight::app()->get('flight.base_url');
                         <tr id="row-<?php echo $animal['animal_id']; ?>">
                             <td><?php echo htmlspecialchars($animal['animal_id']); ?></td>
                             <td><?php echo htmlspecialchars($animal['animal_name']); ?></td>
-                            <td><?php echo htmlspecialchars($animal['espece_name']); ?></td>
+                            <td><?php echo htmlspecialchars($animal['poids_actuel']); ?></td>
                             <td><?php echo htmlspecialchars($animal['poids_minimal_vente']); ?> kg</td>
-                            <td><?php echo htmlspecialchars($animal['poids_actuel']) ? htmlspecialchars($animal['poids_actuel']) . ' kg' : 'Non disponible'; ?></td>
+                            <?php if ($animal['auto_vente'] == 0) { ?>
+                                <td>False</td>
+                            <?php } else { ?>
+                                <td>True</td>
+                            <?php
+                            } ?>
                             <td>
                                 <input type="date" name="date">
                             </td>
@@ -178,14 +183,24 @@ $base_url = Flight::app()->get('flight.base_url');
             $(".vendre-btn").click(function() {
                 let id_animal = $(this).data("id");
                 let button = $(this);
+                let dateVente = button.closest("tr").find("input[name='date']").val(); // Récupérer la date
+
+                if (!dateVente) {
+                    alert("Veuillez sélectionner une date de vente.");
+                    return;
+                }
+
                 $.ajax({
                     url: "<?php echo $base_url; ?>/vente/vendre/" + id_animal,
                     type: "POST",
+                    data: {
+                        date_vente: dateVente
+                    }, // Envoyer la date en POST
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
                             button.replaceWith('<span class="text-muted">Vendu</span>'); // Remplacer le bouton par un texte
-                            alert(response.message + " , prix de vente = " + response.prix_vente);
+                            alert(response.message);
                         } else {
                             alert(response.message);
                         }

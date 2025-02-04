@@ -56,13 +56,13 @@ class Animal
               FROM animaux a
               JOIN espece e ON a.id_espece = e.id
               JOIN etat et ON et.id_animaux = a.id
-              WHERE a.id = :id_animal AND et.date_etat = :date
+               WHERE a.id = :id_animal
               ORDER BY et.id_etat DESC LIMIT 1";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute([
-            'id_animal' => $id_animal,
-            'date' => $date
+            'id_animal' => $id_animal
+            // 'date' => $date
         ]);
 
         $animal = $stmt->fetch();
@@ -76,11 +76,10 @@ class Animal
     public function getAllAnimal()
     {
         session_start();
-        $user_id = $_SESSION['user']['id_user']; // Assurez-vous que c'est bien "id_user"
-
+        $user_id = $_SESSION['user']['id_user']; // Assurez-vous que c'est bien "id_user"   
         $stmt = $this->db->prepare('SELECT * FROM animaux 
                                 WHERE id NOT IN (SELECT animal_id FROM ventes_animaux) 
-                                AND id_user = :id_user' AND );  // Correction ici
+                                AND id_user = :id_user');  // Correction ici
 
         $stmt->execute(['id_user' => $user_id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

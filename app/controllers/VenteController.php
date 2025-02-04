@@ -22,10 +22,10 @@ class VenteController
         Flight::render('vendre/index', $data);
     }
 
-    public function vendre($id_animaux)
+    public function vendre($id_animaux, $date_vente)
     {
         $vente = new Vente(Flight::db());
-        $date_vente = (new DateTime('now', new DateTimeZone('Indian/Antananarivo')))->format('Y-m-d');
+        //  $date_vente = (new DateTime('now', new DateTimeZone('Indian/Antananarivo')))->format('Y-m-d');
         $result = $vente->vendre($id_animaux, $date_vente);
         Flight::json(json_decode($result, true));
     }
