@@ -1,5 +1,6 @@
 <?php
 
+use app\controllers\AchatController;
 use app\controllers\ApiExampleController;
 use app\controllers\WelcomeController;
 use flight\Engine;
@@ -26,9 +27,10 @@ $Welcome_Controller = new WelcomeController();
 $user_controller = new UserController();
 
 $Vente_controller = new VenteController();
-$nourrir_controller=new NourrirController();
-$alimentation_controller=new AlimentationController();
-$animal_controller=new AnimalController();
+$nourrir_controller = new NourrirController();
+$alimentation_controller = new AlimentationController();
+$animal_controller = new AnimalController();
+$achat_controller = new AchatController();
 
 Flight::route('/', [$user_controller, 'loginForm']);
 Flight::route('POST /login', [$user_controller, 'login']);
@@ -51,6 +53,8 @@ FLight::route('GET /achat', [$user_controller, 'goAchat']);
 
 
 Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
+
+Flight::route('POST /achat/acheter/@id', [$achat_controller, 'achat']);
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 

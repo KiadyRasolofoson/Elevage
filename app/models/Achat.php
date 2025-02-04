@@ -3,6 +3,7 @@
 namespace app\models;
 
 use PDO;
+use Exception;
 
 class Achat
 {
@@ -20,6 +21,14 @@ class Achat
      */
     public function getAchatDisponible()
     {
+        session_start();
+        // Vérifier si l'utilisateur est connecté
+        if (!isset($_SESSION['user']['id_user'])) {
+            throw new Exception("Utilisateur non connecté.");
+        }
+        // Récupérer l'ID de l'utilisateur connecté
+        $id_user = $_SESSION['user']['id_user'];
+
         $query = "
             SELECT 
                 va.id AS id_vente, 
@@ -28,6 +37,8 @@ class Achat
                 va.estVendu, 
                 a.id AS id_animal, 
                 a.nom AS nom_animal, 
+                u.id_user AS id_vendeur, 
+                u.nom AS nom_vendeur, 
                 e.nom AS espece 
             FROM 
                 ventes_animaux va 
@@ -35,13 +46,17 @@ class Achat
                 animaux a ON va.animal_id = a.id 
             JOIN 
                 espece e ON a.id_espece = e.id 
+            JOIN 
+                users u ON a.id_user = u.id_user
             WHERE 
                 va.estVendu = 0 
+                AND u.id_user != :id_user_connecte -- Exclure les ventes de l'utilisateur connecté
             ORDER BY 
                 va.id;
         ";
+
         $stmt = $this->db->prepare($query);
-        $stmt->execute();
+        $stmt->execute(['id_user_connecte' => $id_user]); // Passer l'ID de l'utilisateur connecté
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
