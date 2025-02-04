@@ -28,4 +28,8 @@ WHERE
     a.id NOT IN (
         SELECT animal_id
         FROM ventes_animaux
+    )
+    AND a.id NOT IN (
+        SELECT id_animal
+        FROM mort
     );
