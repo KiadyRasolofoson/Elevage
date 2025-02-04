@@ -26,7 +26,7 @@ class Mort
         $stmt->execute([$id_animal, $date]);
         return [
             "success" => true,
-            "message" => "Vente de l'animal enregistrée avec succès."
+            "message" => "Tuer avec succes."
         ];
     }
 }

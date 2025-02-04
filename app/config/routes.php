@@ -60,12 +60,15 @@ FLight::route('GET /achat', [$user_controller, 'goAchat']);
 FLight::route('POST /achat/nourriture', [$achat_controller, 'goAchatNourriture']);
 
 FLight::route('POST /mourrir/tuer', [$mourir_controller, 'goMamono']);
-Flight::route('GET /ajout-alimentation',[$alimentation_controller, 'ajoutation']);
+Flight::route('GET /ajout-alimentation', [$alimentation_controller, 'ajoutation']);
+
+FLight::route('GET /disconnect', [$user_controller, 'logout']);
+
 
 // Flight::route('POST /vente/vendre/@id', [$Vente_controller, 'vendre']);
 
 Flight::route('POST /achat/acheter/@id', [$achat_controller, 'achat']);
-Flight::route('POST /vente/vendre/@id', function($id) use ($Vente_controller) {
+Flight::route('POST /vente/vendre/@id', function ($id) use ($Vente_controller) {
     // Récupération de la date envoyée via AJAX
     $date_vente = Flight::request()->data->date_vente;
 
@@ -82,8 +85,8 @@ Flight::route('POST /vente/vendre/@id', function($id) use ($Vente_controller) {
 //$router->get('/', \app\controllers\WelcomeController::class.'->home'); 
 
 $router->group('/api', function () use ($router, $app) {
-	$Api_Example_Controller = new ApiExampleController($app);
-	$router->get('/users', [$Api_Example_Controller, 'getUsers']);
-	$router->get('/users/@id:[0-9]', [$Api_Example_Controller, 'getUser']);
-	$router->post('/users/@id:[0-9]', [$Api_Example_Controller, 'updateUser']);
+    $Api_Example_Controller = new ApiExampleController($app);
+    $router->get('/users', [$Api_Example_Controller, 'getUsers']);
+    $router->get('/users/@id:[0-9]', [$Api_Example_Controller, 'getUser']);
+    $router->post('/users/@id:[0-9]', [$Api_Example_Controller, 'updateUser']);
 });
