@@ -9,7 +9,7 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nourrir un animal</title>
     <!-- Inclure Bootstrap CSS pour le style -->
-    
+
 </head>
 
 <body>
@@ -22,21 +22,21 @@ $base_url = Flight::app()->get('flight.base_url');
             <!-- Sélection de l'animal -->
             <div class="mb-3">
                 <label for="animal_id" class="form-label">Sélectionner un animal</label>
-                <?php if(isset($_GET['idAnimal'])) {?>
+                <?php if (isset($_GET['idAnimal'])) { ?>
 
                     <select class="form-select" id="animal_id" name="animal_id" required>
-                    <option value="<?= $_GET['idAnimal'] ?>"><?= $_GET['nomAnimal'] ?></option>
-                    
+                        <option value="<?= $_GET['idAnimal'] ?>"><?= $_GET['nomAnimal'] ?></option>
+
                     </select>
 
-                 <?php } else{?>
-                <select class="form-select" id="animal_id" name="animal_id" required>
-                    <option value="">Choisir un animal</option>
-                    <?php foreach ($animals as $animal) : ?>
-                        <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <?php }?>
+                <?php } else { ?>
+                    <select class="form-select" id="animal_id" name="animal_id" required>
+                        <option value="">Choisir un animal</option>
+                        <?php foreach ($animals as $animal) : ?>
+                            <option value="<?= $animal['id'] ?>"><?= $animal['nom'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php } ?>
             </div>
 
             <!-- Sélection de l'alimentation -->
