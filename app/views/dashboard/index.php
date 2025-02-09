@@ -8,7 +8,7 @@ $base_url = Flight::app()->get('flight.base_url');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farm Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+   
     <link rel="stylesheet" href="<?= $base_url; ?>/public/assets/css/dash.css" />
 </head>
 <body>
@@ -113,7 +113,7 @@ $base_url = Flight::app()->get('flight.base_url');
     const dateSelector = document.getElementById('dateSelector');
     if (dateSelector) {
         dateSelector.addEventListener('change', function(e) {
-            fetch(`/?date=${e.target.value}`)
+            fetch(`dashboard/?date=${e.target.value}`)
                 .then(response => response.text())
                 .then(html => {
                     const parser = new DOMParser();
